@@ -1,0 +1,131 @@
+\documentclass{scrartcl}
+
+\usepackage{graphicx} % Required for the inclusion of images
+
+\renewcommand{\labelenumi}{\alph{enumi}.}
+% deutsche Sprache und Umlaute
+\usepackage[utf8x]{inputenc} 
+\usepackage[ngerman]{babel}
+
+
+%BibTex verweise
+\usepackage{cite}
+
+% für url pfade
+\usepackage{url}
+
+% setzt beim neuen Absatz das erste Wort 4 mm nach rechts \\ kleine Abstand vom Rand
+\setlength{\parindent}{4mm}
+
+%für boxen
+\usepackage{pifont,mdframed}
+
+\usepackage{microtype}
+
+% hack für scr paket für Indexierung
+\usepackage{scrhack}
+
+% erzwingen der Positionierung
+\usepackage{float}
+\restylefloat{figure}
+
+% Verbindungen vom Index, Tabellen und Abbildungen
+\usepackage{hyperref}
+
+%Tiefe des Inhaltsverzeichnis
+\setcounter{tocdepth}{5}
+
+%für Unterstriche
+\usepackage{underscore} 
+
+% Beschriftung
+\usepackage{caption}
+\captionsetup{%
+  font=small,
+  labelfont=bf,
+}
+
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=20mm,bmargin=25mm,lmargin=15mm,rmargin=20mm}
+% Set up the images/graphics package
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% listing
+\usepackage{listings}
+\usepackage{color}
+\definecolor{grey}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\tiny,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML} {
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}
+}
+
+ 
+
+\title{Rechnersicherheit - Übung 02}
+\author{Dennis Hägler und Martin Görick}
+%\date{\today}  % if the \date{} command is left out, the current date will be used
+
+
+\begin{document}
+\maketitle
+
+
+\section{Aufgabe 1}
+\begin{itemize}
+\item[a)] In der Partitions- oder Festplattenverschl"usselung
+\item[b)] Die Sektornummer des Chifriertextes m"ussen vorhersagbar sein
+\item[c)] Weil zusammenh"angende Texte zusammen gespeichert werden, wenn keine Fragmentierung vorliegt.
+\item[d)] durch Permutation des Chifriertextes
+\end{itemize}
+
+\section{Aufgabe 2}
+\begin{itemize}
+\item[a)] Durch die kleinen S-Boxen kann "uber raten von Texten den Schl"ussel erhalten.
+\item[b)] "Uber ein lineares Gleichungssystem kann man ohne Substitution den Schl"ussel erhalten.
+\end{itemize}
+
+\section{Aufgabe 3}
+Bei AES geht es um l"angere Texte, deshalb werden diese in kleine Parts aufgeteilt und diese mittels einer SPN verschl"usselt und am Ende zusammengefuegt. Um dies sicherer zu gestallten wird der Geheimtext des vorherigen Block auf den aktuellen Adddiert und fuer den ersten Block ein Initialvektor genommen.
+
+\section{Aufgabe 4}
+\begin{itemize}
+\item[b)] Wenn der letzte Block fehlerhaft "ubertragen wurde, dann ist nur der letzte Klartextblock davon betroffen, da dieser nur fuer diese Entschl"usselung verwendet wird. Ansonsten der Klartextblock des Geheimblockes und der folgende, da Beide diesen verwenden.
+\end{itemize}
+
+\end{document}
