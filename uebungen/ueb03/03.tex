@@ -1,0 +1,124 @@
+\documentclass{scrartcl}
+
+\usepackage{graphicx} % Required for the inclusion of images
+
+\renewcommand{\labelenumi}{\alph{enumi}.}
+% deutsche Sprache und Umlaute
+\usepackage[utf8x]{inputenc} 
+\usepackage[ngerman]{babel}
+
+
+%BibTex verweise
+\usepackage{cite}
+
+% für url pfade
+\usepackage{url}
+
+% setzt beim neuen Absatz das erste Wort 4 mm nach rechts \\ kleine Abstand vom Rand
+\setlength{\parindent}{4mm}
+
+%für boxen
+\usepackage{pifont,mdframed}
+
+\usepackage{microtype}
+
+% hack für scr paket für Indexierung
+\usepackage{scrhack}
+
+% erzwingen der Positionierung
+\usepackage{float}
+\restylefloat{figure}
+
+% Verbindungen vom Index, Tabellen und Abbildungen
+\usepackage{hyperref}
+
+%Tiefe des Inhaltsverzeichnis
+\setcounter{tocdepth}{5}
+
+%für Unterstriche
+\usepackage{underscore} 
+
+% Beschriftung
+\usepackage{caption}
+\captionsetup{%
+  font=small,
+  labelfont=bf,
+}
+
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=20mm,bmargin=25mm,lmargin=15mm,rmargin=20mm}
+% Set up the images/graphics package
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% listing
+\usepackage{listings}
+\usepackage{color}
+\definecolor{grey}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\tiny,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML} {
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}
+}
+
+ 
+
+\title{Rechnersicherheit - Übung 02}
+\author{Dennis Hägler und Martin Görick}
+%\date{\today}  % if the \date{} command is left out, the current date will be used
+
+
+\begin{document}
+\maketitle
+
+
+\section{Aufgabe 1}
+
+\section{Aufgabe 2}
+\begin{itemize}
+\item[a)] Es ist IND-CPA sicher, da bei jedem Verschlüsseln eine neue Zufallszahl generiert wird, weshalb zwei Verschlüsselungen des selben Textes verschiedene Geheimtexte erzeugen.
+\item[b)] Wenn die selbe Zufallszahl mehrfach genommen wird, dann wird aus dem selben Klartext jedes mal beim Verschlüsseln der selbe Geheimtext erzeugt, damit wäre das Verfahren unsicher.
+\end{itemize}
+
+\section{Aufgabe 3}
+
+\section{Aufgabe 4}
+Da alle Geburtstage von einander abhängig sind, steht immer nur 1 von 365  zur Wahl. Diese werden durch die Abhängigkeit multipliziert.
+$$ P(n) = \frac{1}{365}^{n}$$
+$$ P(20) = 5,68 * 10^{-52} \% $$
+
+\end{document}
