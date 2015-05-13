@@ -174,7 +174,7 @@ Signatur für Nachricht m erzeugen mit Hashfunktion H.
 \item[1.] berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$  
 \item[2.] wähle zufällige Ganzzahl $k$ von 1 bis n-1
 \item[3.] berechne $r = x_1 (\text{mod } n) $, wobei $(x_1, y_1) = k * G$, wenn $r = 0$ gehe zu 2.
-\item[4.] berechne $s = k^{-1} ( z + r * sk) (\text{mod } n)$($z$ wird dafür in eine Ganzzahl umgewandelt), wenn $s = 0$ gehe zu 2.
+\item[4.] berechne $s = k^{-1} ( z + r * sk) (\text{mod } n)$($z$ wird in eine Ganzzahl umgewandelt), wenn $s = 0$ gehe zu 2.
 \item[5.] Signatur ist das Paar $(r,s)$
 \end{itemize}
 
@@ -188,12 +188,15 @@ Wenn nicht sicher ist ob der pk richtig erzeugt wurde muss dieser überprüft we
 
 Signatur überprüfen in den Folgenden Schritten:
 \begin{itemize}
-\item überprüfen ob r und s ganze Zahlen und im Intervall von $1$ bis $n-1$, wenn nicht dann Signatur ungültig
+\item überprüfen ob r und s ganze Zahlen und im Intervall von $1$ bis $n-1$, wenn nicht Signatur ungültig
 \item berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$
 \item berechne $w = s^{-1} (\text{mod } n)$
 \item berechne $u_1 = z * w 	(\text{mod } n)$ und $u_2 = r * w (\text{mod } n)$
 \item berechne $(x_1,y_1) = u_1 G + u_2 pk$
 \item Signatur ist gültig, wenn $r = x_1 (\text{mod } n)$ 
 \end{itemize}
+
+\paragraph*{Quelle}
+Wikipedia \url{http://de.wikipedia.org/wiki/Elliptic_Curve_DSA}
 \end{document}
 
