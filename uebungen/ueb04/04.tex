@@ -4,7 +4,7 @@
 
 \renewcommand{\labelenumi}{\alph{enumi}.}
 % deutsche Sprache und Umlaute
-\usepackage[utf8x]{inputenc} 
+\usepackage[utf8x]{inputenc}
 \usepackage[ngerman]{babel}
 
 
@@ -36,7 +36,7 @@
 \setcounter{tocdepth}{5}
 
 %für Unterstriche
-\usepackage{underscore} 
+\usepackage{underscore}
 
 % Beschriftung
 \usepackage{caption}
@@ -50,6 +50,7 @@
 %\geometry{showframe}% for debugging purposes -- displays the margins
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{geometry}
 \geometry{verbose,a4paper,tmargin=20mm,bmargin=25mm,lmargin=15mm,rmargin=20mm}
 % Set up the images/graphics package
@@ -97,12 +98,12 @@
 }
 
 \makeatletter
-\newenvironment{CenteredBox}{% 
+\newenvironment{CenteredBox}{%
 \begin{Sbox}}{% Save the content in a box
 \end{Sbox}\centerline{\parbox{\wd\@Sbox}{\TheSbox}}}% And output it centered
 \makeatother
 
- 
+
 
 \title{Rechnersicherheit - Übung 04}
 \author{Dennis Hägler und Martin Görick}
@@ -118,7 +119,7 @@ Zuerst wird mittels einer Blockchiffre aus dem geheimen Schlüssel $K$ zwei Schl
 Danach wird die MAC nach Abbildung \ref{fig:cmac} generiert.
 
 \textbf{CHIP} ist die Blockchiffre mit dem geheimen Schlüssel K
-\textbf{$MBS_Tlen$} ist die Länge der MAC
+\textbf{$MBS_{Tlen}$} ist die Länge der MAC
 
 \begin{figure}[thp]
   \begin{CenteredBox}
@@ -131,12 +132,15 @@ Danach wird die MAC nach Abbildung \ref{fig:cmac} generiert.
 Zur Verifikation wird aus dem $K,M$ ein $T'$ berechnet und mit dem übermittelten $T$ verglichen.
 
 \paragraph*{Quelle}
-Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication, Morris Dworkin, 	NIST Special Publication 800-38B, May 2005. 
+Recommendation for Block Cipher Modes of Operation: The CMAC Mode for Authentication, Morris Dworkin, 	NIST Special Publication 800-38B, May 2005.
 
 
 \section*{Aufgabe 2}
 \begin{itemize}
-\item[1] Ein Empfänger welcher den Schlüssel zum vergleichen hat, könnte mit einer zufälligen Signatur, zufällige aussehende Texte erstellen. Damit kann verhindert werden, dass der Sender zufällige Texte wie Schlüssel signieren kann, da nicht sicher ist ob die zufälligen Texte vom Sender sind. 
+\item[1] Ein Empfänger welcher den Schlüssel zum vergleichen hat, könnte mit
+  einer zufälligen Signatur, zufällige aussehende Texte erstellen. Damit kann
+  verhindert werden, dass der Sender zufällige Texte wie Schlüssel signieren
+  kann, da nicht sicher ist ob die zufälligen Texte vom Sender sind.
 \item[2] Ein Empfänger will aus einem Text m und einer Signatur s ein eigenes Dokument $m''$ mit der gültigen Signatur $s''$ erzeugen. Unter einem Vorwand soll der Sender ein Dokument $m' = m^{-1} * m''$ signieren. Der Sender soll keinen Verdacht schöpfen, da $m'$ unsinnig ist. Mit der erhaltenen Signatur $s'$ unter mod n gerechnet und mit dem privaten Schlüssel $d$ erhält der Angreifer ein $s''$ wie folgt.
 $$s'' = s * s' = m^d * m'^d = (m*m')^d = (m*m6{-1} * m'')^d = m''^d$$
 \end{itemize}
@@ -147,10 +151,49 @@ RSA-Signatur,Hans Werner Lang, 2014, \url{http://www.iti.fh-flensburg.de/lang/kr
 \section*{Aufgabe 3}
 
 \begin{itemize}
-\item[a)] 
-\item[b)]
+\item[a)] In der Menge $\mathbb{Z}^*_p (g)$ sind alle Möglichkeiten enthalten, den geheimen Schlüssel zu wählen. Dieser wird aus 4. $a$ gewählt wie beschrieben geht a von 1 bis $q-1$. Theoretisch könnte jedoch auch q als geheimer Schlüssel gewählt werden. Diese Zahl ist jedoch bekannt, weshalb diese nicht verwendet wird. Also sind in der Menge $\mathbb{Z}^*_p (g)$ genau q Elemente mit allen möglichen Elementen von $A$ sowie $g^q$.
+\item[b)] q muss mindestens eine Länge von 224 Bit und p 2048 Bit Länge besitzen.
 \end{itemize}
 
 \section*{Aufgabe 4}
+\begin{itemize}
+\item $G$ ist ein fester Erzeuger der n-Torsionsuntergruppe der Kurve
+\item $n$ ist die Ordnung des Punktes G
+\item $L_n$ die Bitlänge der Gruppenordnung n
+\end{itemize}
 
+\subsection*{Schlüsselerzeugung}
+\begin{itemize}
+\item privat key (sk) ist ein zufällige Ganzzahl zwischen $1$ und $n-1$
+\item public key $pk = sk * G$
+\end{itemize}
+
+\subsection*{Signaturerzeugung}
+Signatur für Nachricht m erzeugen mit Hashfunktion H.
+\begin{itemize}
+\item[1.] berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$  
+\item[2.] wähle zufällige Ganzzahl $k$ von 1 bis n-1
+\item[3.] berechne $r = x_1 (\text{mod } n) $, wobei $(x_1, y_1) = k * G$, wenn $r = 0$ gehe zu 2.
+\item[4.] berechne $s = k^{-1} ( z + r * sk) (\text{mod } n)$($z$ wird dafür in eine Ganzzahl umgewandelt), wenn $s = 0$ gehe zu 2.
+\item[5.] Signatur ist das Paar $(r,s)$
+\end{itemize}
+
+\subsection*{Überprüfen der Signatur}
+Wenn nicht sicher ist ob der pk richtig erzeugt wurde muss dieser überprüft werden.
+\begin{itemize}
+\item Überprüfen ob pk nicht das neutrale Element der Kurve ist und es valide Koordinaten.
+\item Überprüfen ob pk auf der Kurve liegt.
+\item überprüfe ob n*pk = neutrales Element, es wird überprüft ob pk ein Vielfaches von G ist.
+\end{itemize}
+
+Signatur überprüfen in den Folgenden Schritten:
+\begin{itemize}
+\item überprüfen ob r und s ganze Zahlen und im Intervall von $1$ bis $n-1$, wenn nicht dann Signatur ungültig
+\item berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$
+\item berechne $w = s^{-1} (\text{mod } n)$
+\item berechne $u_1 = z * w 	(\text{mod } n)$ und $u_2 = r * w (\text{mod } n)$
+\item berechne $(x_1,y_1) = u_1 G + u_2 pk$
+\item Signatur ist gültig, wenn $r = x_1 (\text{mod } n)$ 
+\end{itemize}
 \end{document}
+
