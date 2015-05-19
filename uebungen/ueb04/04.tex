@@ -171,7 +171,7 @@ RSA-Signatur,Hans Werner Lang, 2014, \url{http://www.iti.fh-flensburg.de/lang/kr
 \subsection*{Signaturerzeugung}
 Signatur für Nachricht m erzeugen mit Hashfunktion H.
 \begin{itemize}
-\item[1.] berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$  
+\item[1.] berechne $e = H(m)$ und definiere $z$ mit den $L_n$ hochwertigsten Bits von $e$
 \item[2.] wähle zufällige Ganzzahl $k$ von 1 bis n-1
 \item[3.] berechne $r = x_1 (\text{mod } n) $, wobei $(x_1, y_1) = k * G$, wenn $r = 0$ gehe zu 2.
 \item[4.] berechne $s = k^{-1} ( z + r * sk) (\text{mod } n)$($z$ wird in eine Ganzzahl umgewandelt), wenn $s = 0$ gehe zu 2.
@@ -193,7 +193,7 @@ Signatur überprüfen in den Folgenden Schritten:
 \item berechne $w = s^{-1} (\text{mod } n)$
 \item berechne $u_1 = z * w 	(\text{mod } n)$ und $u_2 = r * w (\text{mod } n)$
 \item berechne $(x_1,y_1) = u_1 G + u_2 pk$
-\item Signatur ist gültig, wenn $r = x_1 (\text{mod } n)$ 
+\item Signatur ist gültig, wenn $r = x_1 (\text{mod } n)$
 \end{itemize}
 
 \paragraph*{Quelle}
