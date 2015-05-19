@@ -114,7 +114,36 @@
 \maketitle
 
 
-\section*{Aufgabe 1 - }
-\section*{Aufgabe 2 - qualifizierte elektronische Signatur}
-\section*{Aufgabe 3 - OpenPGP Protol}
+\section{Aufgabe 1 - }
+\section{Aufgabe 2 - qualifizierte elektronische Signatur}
+Das deutsche Signaturgesetz (SigG) unterscheidet elektronische Signaturen,
+fortgeschrittene elektronische Signaturen und qualifizierte elektronische
+Signaturen. Qulifizierte elektronische Signaturen sind eigentlich Inhalt des
+Gesetzes.
 
+\subsubsection{Signaturgesetetz}
+\begin{itemize}
+\itme private Keys muessen auf Hardware gespeichert werden, aus der sie nicht
+gelesen werden koennen (z.B. Smartcars)
+\end{itemize}
+
+\section{Aufgabe 3 - OpenPGP Protol}
+\subsection{Signatur}
+\begin{itemize}
+  \item OpenPGP unterstuetz digitale Signaturen
+  \item Absender bildet Hash-Wert und signiert dieses
+  \item Empfaenger prueft Signatur mit public key
+\end{itemize}
+
+\subsection{Schluesselbeglaubigung}
+\begin{itemize}
+  \item basiert auf Web of Trust (jeder Teilnehmer kann Schluessel des anderen
+    signieren)
+  \item Name, E-Mail und Kommentar ermoeglichen Dritten die Authentiziteat des
+    Zertifikates einzuschaetzen
+  \item Zertifizierung bezieht sich nur auf die Echtheit des Schluessels
+  \item Die Gueltigkeit von Zertifikation ist eine oeffentliche Informaiton
+  \item Echtheit kann auch mit Fingerabdruck (Pruefsumme verglichen werden)
+\end{itemize}
+
+\end{document}
