@@ -97,7 +97,7 @@
 
  
 
-\title{Rechnersicherheit - Übung 02}
+\title{Rechnersicherheit - Übung 03}
 \author{Dennis Hägler und Martin Görick}
 %\date{\today}  % if the \date{} command is left out, the current date will be used
 
@@ -110,8 +110,8 @@
 
 \section{Aufgabe 2}
 \begin{itemize}
-\item[a)] Es ist IND-CPA sicher, da bei jedem Verschlüsseln eine neue Zufallszahl generiert wird, weshalb zwei Verschlüsselungen des selben Textes verschiedene Geheimtexte erzeugen.
-\item[b)] Wenn die selbe Zufallszahl mehrfach genommen wird, dann wird aus dem selben Klartext jedes mal beim Verschlüsseln der selbe Geheimtext erzeugt, damit wäre das Verfahren unsicher.
+\item[a)] Es ist IND-CPA sicher, da bei jedem Verschlüsseln eine neue Zufallszahl generiert wird, weshalb zwei Verschlüsselungen des selben Textes verschiedene Geheimtexte erzeugen. Damit liegt die Wahrscheinlich bei zwei verschiedenen Texten, wenn einer zufällig gewählt wird nur bei $ \frac{1}{2}$ den richtigen Text zu erkennen.
+\item[b)] Wenn die selbe Zufallszahl mehrfach genommen wird, dann wird aus dem selben Klartext jedes mal beim Verschlüsseln der selbe Geheimtext erzeugt, damit wäre das Verfahren unsicher, da ähnliche Texte gleich verschlüsselt werden.
 \end{itemize}
 
 \section{Aufgabe 3}
