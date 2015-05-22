@@ -7,6 +7,7 @@
 Wenn P = NP, dann gibt es keine sichere Kryptographie
 
 **Erinnerung**
+
 1.
 Eingabe x element {0,1}^n
 deterministische Alg. A (genau ein Berechnungsweg)
@@ -26,6 +27,7 @@ A(x,r)
 * 2. und 3. sind nur verschiedene Interpretationen des selben Modells
 
 **Polynomielle Laufzeit**
+
 A benötigt für eine Eingabe x element {0,1}^n höchstens p(n) Schritte (p ein Ploynom)
 (unabhängig vom gewählten Berechnungsweg oder der randomisierten Eingabe)
 
@@ -33,10 +35,12 @@ A benötigt für eine Eingabe x element {0,1}^n höchstens p(n) Schritte (p ein 
 * Probleme die nur Ja/Nein zulassen.
 
 **Beispiel 1.: Clique**
+
 Eingabe: Graph G = (V,E)  und k element N
 Frage: Hat G ein Clique >= k?
 
 **Bsp 2.: Wortproblem**
+
 geg.: Sprache L aus {0,1}*
 Eingabe: w element {0,1}*
 Frage: Gilt w element L?
@@ -123,6 +127,7 @@ Alg. Urbild für f: Eingabe y element {0,1}^S(n)
 3. if (y, x_1, ... x_i-1, 0) element L
 4. x_i = 0
 5. else x_i = 1
+6. return x_1, ..., x_n
 
 Wenn L element P, können wir dies in pol. Zeit beantworten.
 
