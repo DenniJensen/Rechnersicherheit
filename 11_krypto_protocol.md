@@ -113,4 +113,18 @@ N_B = dec_K (T_BA)
 T_AB = enc_K(N_B - 1)
 Schickt T_AB zu B                                      Prüft T_AB
 
+**Ziel**
+
+Authentischer Schlüsselaustausch zwischen A und B
+
+**Nonce**
+
+Number only used once (jedes mal neu zu wählen)
 Nonce verhindert Replay-Attacke
+
+####Replay-Attacke
+Wiedereinspielung zuvor belauschter Kommunikation
+
+**Ziel**
+
+Vortäuschen einer Identität
