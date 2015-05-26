@@ -115,7 +115,48 @@
 
 
 \section{Aufgabe 1 - Diffie-Hellman}
+\subsection{Station-to-Station-Protokoll}
+\begin{itemize}
+  \item verwendung von difitalen Signaturen(RSA) und MAC
+\end{itemize}
+
 \section{Aufgabe 2 - SPEKE}
 
 \section{Aufgabe 3 - Needham-Schroeder}
+\begin{itemize}
+  \item jeweils geheimer Schlüssel zwischen Teilnehmer und Authentication Server
+  \item durch authentizierung der Teilnehmer mit AS, sind teilnehmer
+    untereinander authentiziert
+\end{itemize}
+\begin{enumerate}
+  \item Teilnehmer A versendet verschl. Nachricht an AS (authentizität und
+    gewünschter Korrespondenten enthalten, sowie eine Nonce)
+  \item AS nutzt geheimen Schlüssel beider Kommunikationspartner (Antwort an A
+    verschlüsselt mit dem Schlüssel von A, enthält Nonce(Sicherstellung ob
+    nicht Aufgezeichnete Nachricht)). Nachricht enthält Identität von B.
+    Letzte Block ist mit dem Schlüssel von B verschlüsselt(befindet sich in der
+    verschlüsslten Nachricht an A)
+  \item A sendet an B (verschlüsselt mit B Schlüssel). B kann Nachricht
+    entschlüsseln und weiß dass A eine sichere Verbindung mit dem
+    Sitzungschlüssel durchführen möchte. A und B besitzen in dem moment den
+    Sitzungschlüssel. A weiß dass jede nachricht, die mit Sitzungschlüssel
+    verschlüsselt wurde von B stammt.
+\end{enumerate}
+
+\begin{itemize} {Assymmetrisch}
+  \item A will mit B kommunizieren
+  \item A und B brauchen jeweils die Public Keys des jeweils anderen
+  \item Teilinstanz T wird dafür benötigt
+  \item T kennt A und B
+  \item beugt Man-In-The-Middle-Angriff vor
+\end{itemize}
+
+\begin{enumerate}
+  \item A sendet an T unverschlüsselte Nachricht (will mit B sprechen)
+  \item T antwortet mit public Key von B + Identität von B (mit private von T
+    signiert) (stellt sicher dass die Antwort von T kommt)
+  \item A kann mit public Key von B an B senden (verschlüsselt mit Nonce NA und
+    A als Absender)
+\end{enumerate}
+
 \end{document}
