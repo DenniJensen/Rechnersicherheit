@@ -36,11 +36,11 @@ Beide Partner haben eine Liste mit Passwörtern
 
 B gibt Nummer aus der Liste an.
 
-B: Prüfer (Liste L)               A: Beweisender (Liste L)
----------------------------------------------------------------
-Wähle Index i         ---i-->     Sende i-tes Passwort P_i
-(chalenge)            <--P_i--    (response)
-Prüfe P_i
+B: Prüfer (Liste L)  |             |  A: Beweisender (Liste L)
+----------------------| --------------|--------------------------
+Wähle Index i        | ---i-->    | Sende i-tes Passwort P_i
+(chalenge)           | <--P_i--   | (response)
+Prüfe P_i|
 
 Klassisches Challenge-Response-Protokoll
 
@@ -68,12 +68,12 @@ im Skript, siehe mitschrift
 
 Vorab ausgetauschte Geheimnis ein symmetrischer Schlüssel k
 
-B: Prüfer (k)                           A: Beweisende (k)
-------------------------------------------------------------
-Wähle Zufall c      -----c---->    Berechne r = MAC(k,c)
-(Challenge)         <----r-----    (Einmalpasswort, response)
-Berechne r' = MAC (k,r)
-Prüfe r' = r
+B: Prüfer (k) | |                           A: Beweisende (k)
+--------------|-|---------------------------------------------
+Wähle Zufall c  |    -----c---->  |  Berechne r = MAC(k,c)
+(Challenge)     |    <----r-----   | (Einmalpasswort, response)
+Berechne r' = MAC (k,r) |
+Prüfe r' = r |
 
 Alternative: Nutze ein (asymm.) Signaturverfahren
 Schlüsselpaar (pk,sk)

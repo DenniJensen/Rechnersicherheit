@@ -13,11 +13,11 @@ A will B eine vertrauliche Nachricht m schicken
 * B besitzt Schlüsselpaar (pk, sk) (z.B. für RSA)
 * A vertraut pk (weiß das dieser B gehört)
 
-A öffl. Schlüssel pk = (e,n)            B geheimer Schlüssel sk = d
-----------------------------------------------------------------------
-Wähle Zufallsschlüssel k               Berechne k = (k')^d mod n
-Berechne k' = k^e mod n        k',c    und m =dec(c,k)
-und c = enc(m,k)               --->
+A öffl. Schlüssel pk = (e,n) | |         B geheimer Schlüssel sk = d
+------------------------------|-|---------------------------------------
+Wähle Zufallsschlüssel k  |            | Berechne k = (k')^d mod n
+Berechne k' = k^e mod n    |  -- k',c ->   | und m =dec(c,k)
+und c = enc(m,k)           |   
 
 ####Eigenschaften
 * Für jede Kommunikation wird ein neuer symme. Schlüssel
@@ -30,16 +30,15 @@ Sicherheit beruht auf Diskrete Logarithmusproblem, also
 * Wir brauchen einen Erzeuger g element Z^*_p (um kleine Untergruppen
   auszuschließen)
 
-A Parameter (p,g)               B Parameter (p,g)
-------------------------------------------------------
-Wähle Zufall x             X   Wähle Zufall y
-Berechne X = g^x mod p   --->  Berechnet Y = g^y mod p
-
-Berechne Y^x mod p         Y   Berechne Y = X^y mod p
-                         <---
-
-(g^y)^x mod p                  (g^x)^y mod p
-g^yx mod p                     g^xy mod p
+A Parameter (p,g)  |           |  B Parameter (p,g)
+-------------------|------------|-----------------------
+Wähle Zufall x      |        | Wähle Zufall y
+Berechne X = g^x mod p |  -- X -> | Berechnet Y = g^y mod p
+||
+Berechne Y^x mod p  |          |Berechne Y = X^y mod p
+               ||
+(g^y )^x mod p    |             | (g^x )^y mod p
+g^yx mod p       |             | g^xy mod p
 
 
 Aus g^xy mod p lassen sich dann Schlüssel für z.B. Secure Messaging:
@@ -76,13 +75,13 @@ Bsp.: für ein Password-Authenticated Key Agreement Protocol
 * Parameter q prim mit p = 2 * q + 1 prim und Hashfunktion H
 * A und B haben ein gemeinsames Passwort pi
 
-A Paramter (p,H, pi)               B Parameter (p,H, pi)
--------------------------------------------------------------
-Berechne g = H(pi)^2 mod p         Berechne g = H(pi)^2 mod p
-Wähle Zufall x               X     Wähle Zufall y
-Berechne X = g^x mod p     ---->   Berechne Y = g^y mod p
-Y^X = g^xY mod p             Y     X^Y = g^Xy mod p
-                           <----
+A Paramter (p,H, pi) |             |  B Parameter (p,H, pi)
+---------------------|-------------|---------------------------
+Berechne g = H(pi)^2 mod p |       |  Berechne g = H(pi)^2 mod p
+Wähle Zufall x        |          |  Wähle Zufall y
+Berechne X = g^x mod p |    -- X --> |  Berechne Y = g^y mod p
+Y^X = g^xY mod p       |    <-  Y --  |  X^Y = g^Xy mod p
+                          
 
 Die Wahl von p = 2 * q + 1 prim : Z^*_p = {1, ..., p-1}
 Jede Untergruppe U von Z^*_p : |U| / |Z^*_p| = p - 1 = 2 * q
@@ -101,17 +100,17 @@ Es wird in Authentifizierungsserver (AS) benötigt
 * A und B (kommunikation Partner) haben jeweils symm. Schlüssel K_A und K_B
   (die auch dem AS bekannt sind)
 
-      A K_A                       AS K_A K_B               B K_B
--------------------------------------------------------------------------
-Wähle Nonce N_A           T     Wähle Schlüssel K
-T = enc_K_A (A||B||N_A) ---->   T_B = enc_K_B(K||A)    dec_K_B(T_B)
-                         T_A    T_A = enc_K_A          Nonce N_B
-dec_K_A (T_A)           <----   (N_A||B||K||T_B)       T_BA =  enc_K (N_B)
+ A K_A     |          AS K_A K_B         |      B K_B
+----------------|----------------------------|--------------------
+Wähle Nonce N_A  ||      Wähle Schlüssel K   
 
+T = enc_K_A (A ||B||N_A) | -- T -->   T_B = enc_K_B(K||A) |   dec_K_B(T_B)
+ T_A = enc_K_A       Nonce N_B
+dec_K_A (T_A)           <-- T_A --   (N_A||B||K||T_B)      T_BA =  enc_K (N_B)
 Schickt T_B zu B                                       schickt T_BA zu A
-N_B = dec_K (T_BA)
-T_AB = enc_K(N_B - 1)
-Schickt T_AB zu B                                      Prüft T_AB
+N_B = dec_K (T_BA) 
+T_AB = enc_K(N_B - 1) 
+Schickt T_AB zu B                                    Prüft T_AB
 
 **Ziel**
 
