@@ -115,10 +115,48 @@
 
 
 \section*{Aufgabe 1 - Seed-Generierung}
+\begin{itemize}
+  \item von der Theorie abhänging von einander
+  \item praktisch nicht, da exakte Taktfrequenz nicht simuliert werden kann
+  \item Systemstart und Prozessortakt ist unterschiedlich
+  \item dazu kommen unterschiede durch Netzwerkabhängigkeiten
+\end{itemize}
 
 \section*{Aufgabe 2 - Deterministische Zufallszahlengeneratore}
+\subsection*{kryptographisch}
+\begin{itemize}
+  \item Hashfunktion basiert auf Einwegfunktion
+  \item Seed ist zufällig und kann nicht reproduziert werden
+  \item sollte Hashfunktion rückgängig berechnet werden können, kann nicht
+    bestimmt werden ob Seed richtig ist, da er zufällig entstanden ist
+\end{itemize}
+
+\subsection*{Blockchiffren im Counter-Mode}
+\begin{itemize}
+  \item keine Abhängigkeit zu Vor- oder Nachfolger Block
+  \item Komplett parallel durchführbar
+  \item durch den Counter verändert sich der Input, daraus entsteht komplett
+    verschiedener output
+\end{itemize}
 
 \section*{Aufgabe 3 - Instanzauthentisierung}
+\subsection*{Passwordlisten}
+\begin{itemize}
+  \item schutz vor Key-Loggin und Replay Attacken, da Passowrd nur einmalig
+    benutzt werden können und dannach verfallen
+  \item gegen Phiishing nicht sicher da Passwörter abgefangen und selbst
+    benutzt werden können (Passwörter wurden im Echtsystem nicht genutzt und
+    sind dadurch noch aktiv)
+\end{itemize}
+
+\subsection*{Passwordgenerator}
+\begin{itemize}
+  \item im gegebenen Zeitintervall nicht vor Replay Attacken sicher (Passwort
+    verfällt erst nach dem Zeitintervall und ist somit noch gültig)
+  \item Phishing ist innerhalb des Zeitintervalls möglich
+  \item Key-Loggin ist nur innerhalb des Zeitintervalls möglich wenn das
+    Password sofort weiter übermittelt wird und genutzt wird
+\end{itemize}
 
 \section*{Aufgabe 4 - Passwörter}
 
