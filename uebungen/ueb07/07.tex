@@ -122,6 +122,21 @@
   \item dazu kommen unterschiede durch Netzwerkabhängigkeiten
 \end{itemize}
 
+B und A,C,D sind offensichtlich unabhängig voneinander, weil dies zunächst 2 vollkommen unterschiedliche 
+Systemaufrufe sind. Wichtig ist es, dass sie unabhängig voneinander sind, da man sonst aus Kenntnis dreier 
+Werte den 4. berechnen könnte. Angenommen, A,C und D sind bekannt, B jedoch nicht. Wären sie nicht unabhängig, 
+so wäre B jetzt berechenbar (abhängig). Sind sie unabhängig, so muss der Angreifer nur noch die $2^{23}$ des 
+Wertes B ermitteln. Dies sind zwar immer noch sehr viele Werte, aber nicht unmöglich zu berechnen. Deshalb 
+sollte eine Unabhängigkeit bestehen.
+\newline
+
+A,C und D sind zwar alles Aufrufe der selben Funktion, sind aber deshalb unabhängig voneinander, weil sie zu 
+vollkommenen Zeitpunkten aufgerufen werden. Es kann nicht garantiert werden, dass diese jeweils in gleichen 
+zeitlichen Abständen voneinander aufgerufen werden (es sei denn, man führt eine Automatisierung dieser 
+Vorgänge ein). Je nach Auslastung und HW variieren also dort die zurückgekommenen Zeitpunkte und Werte. 
+Man kann lediglich sagen, dass $A \leq C \leq D$, weil nach zeitlichem Ablauf wesentlich mehr 
+Prozessorzyklen erfolgt sind.
+
 \section*{Aufgabe 2 - Deterministische Zufallszahlengeneratore}
 \subsection*{kryptographisch}
 \begin{itemize}
@@ -131,6 +146,14 @@
     bestimmt werden ob Seed richtig ist, da er zufällig entstanden ist
 \end{itemize}
 
+Zunächst hat man bei diesem Verfahren den Startwert Seed. Dieser dient als Input füt eine Hashfunktion. Das Ergebnis
+dessen ist wiederum Input für die nä. iterative Anwendung der Hashfunktion. Die in der VL kennen gerlernten krypto.
+Hashfunktionen sind dabei Einwegfunktionen. Dies bedeutet, für alle x H(x) effizient zu berechnen ist, für alle y
+jedoch ist es schwer, das m aus $H^{-1}$(y) zu finden. Da auch hierbei die Hashfunktion iterativ angewendet wird
+(Teilfolge ist Input für nä. Stufe), und diese Einwegfunktionen sind, ist es also nicht möglich, aus einer bel.
+Teilfolge Vor- bzw. Nachfolger berechnen zu können. Denn dann müsste die Umkehrung ebenfalls effizient berechenbar
+sein, was sie jedoch nicht ist.
+
 \subsection*{Blockchiffren im Counter-Mode}
 \begin{itemize}
   \item keine Abhängigkeit zu Vor- oder Nachfolger Block
@@ -138,6 +161,14 @@
   \item durch den Counter verändert sich der Input, daraus entsteht komplett
     verschiedener output
 \end{itemize}
+
+Hier kommen ein Initialisierungsvektor IV, ein Counter, ein Schlüssel K, Blockchiffren und Klartexte zum Einsatz.
+Input für die Blockchiffre ist eine Konkatenation des Ivs (Nonce) und des Counters (iterative Erhöhung), sowie der
+Schlüssel k. Das Ergebnis wird mit einem Klartextblock (KTB) addiert und dieses Ergebnis wiederum ist ein 
+Geheimtextblock (GTB). Dieser Vorgang ist dabei komplett parallel durchführbar, d.h. es bestehen keine 
+Abhängigkeiten untereinander. Dies bedeutet dabei, dass man also aus der Kenntnis eines Blockes nicht 
+benachbarte oder andere Blöcke kompromittieren kann. Auf die Aufgabe bezogen bedeutet dies, dass man 
+aus einer Teilfolge also nicht auf den Vorgänger bzw. Nachfolger schließen kann.
 
 \section*{Aufgabe 3 - Instanzauthentisierung}
 \subsection*{Passwordlisten}
@@ -149,6 +180,15 @@
     sind dadurch noch aktiv)
 \end{itemize}
 
+\begin{itemize}
+  \item  Phishing: ja. Falsche Website gibt sich als richtige aus und gelangt an TAN. Angreifer muss nun hoffen/dafür
+  sorgen, dass Bank gleiches i abfragt wie er den Benutzer (oder Akkumulation vieler i von Benutzer)
+  \item Key Logging: kriegt dann $p_{i}$ mit und somit erfolgreich. Verfällt ja aber nach Benutzung, deshalb eher
+  suboptimal für Angreifer, da dieser en Transfer von $p_{i}$  abbrechen müsste, damit er es schicken kann
+  \item Replay: nach Ausgabe des i. Passwortes wird dieses ja von der Liste gestrichen $\Rightarrow$ Angriff nicht
+  möglich
+\end{itemize}
+
 \subsection*{Passwordgenerator}
 \begin{itemize}
   \item im gegebenen Zeitintervall nicht vor Replay Attacken sicher (Passwort
@@ -158,6 +198,48 @@
     Password sofort weiter übermittelt wird und genutzt wird
 \end{itemize}
 
+\begin{itemize}
+  \item  Phishing:  kriegt dann zwar das gesendete p, kennt jedoch das vorab ausgetauschte g nicht; schickt er aber
+  die Antwort immerhalb des Toleranz-Intervalls $\Rightarrow$  Angriff geglückt
+  \item Key Logging:  kriegt zwar dann die message mit, allerdings nicht den key, da der ja bereits vorab ausgetauscht
+  worden ist
+  \item Replay: generell nicht; innerhalb des Toleranzintervalls jedoch schon (in VL: 30 s)
+\end{itemize}
+
+\subsection*{Ereignisgesteuerte Passwortgeneratoren}
+\begin{itemize}
+  \item  Phishing: Angreifer kennt zwar g nicht; täuscht aber Opfer und kriegt pt (ohne Notwendigkeit der 
+  Kenntnis von S oder k); schickt  $p_{t}$ an Prüfer;  $p_{t}$ ist ja gültiger Lamport-Hash $\Rightarrow$  
+  akzeptiert $\Rightarrow$  getäuscht
+  \item Key Logging:  nach Benutzung eines Einmalpasswortes wird ein anderes benutzt; Keylogger kann dann zwar das
+  aktuelle Passwort mit, müsste aber Sendung des aktuellen Passwortes vom Opfer verhindern und selbst die Sendung
+  vornehmen; also eher wirkungslos
+  \item Replay:  Generierung neuer Einmalpasswörter (N Stück); bei vollständiger Benutzung: neuer Startwert 
+  S für neue N Hashfunktionen; Replay-A. somit nicht möglich
+\end{itemize}
+
+\subsection*{Challenge Response Passwortgeneratoren}
+\begin{itemize}
+\item  Phishing: Angreifer kennt k nicht, kriegt dann c übertragen, schickt c an das Opfer, bekommt das 
+r, schickt r an den Prüfer, r = r' $\Rightarrow$  ohne Kenntnis von k erfolgreich getäuscht
+\item Key Logging: loggt dann r mit (falls es eingegeben wird), aber auch hier wieder: müsste Übertragung 
+von r an Prüfer durch Beweisenden verhindern und stattdessen sein geloggtes r schicken
+\item Replay: wenn c wirklich jedes Mal wechselt, ändert sich auch r; Angreifer müsste dann sehr, sehr 
+viele c sammeln; theoretisch möglich, praktisch wenig rentabel
+\end{itemize}
+
 \section*{Aufgabe 4 - Passwörter}
+
+
+Einmalpasswörter schützen gegen Ausspähen laut Skript. Problematisch: Man-in-the-Middle.
+\newline
+
+Steht ja eigentlich im Skript RS13, Seite 60 unten/61 oben –  z.B.Verfahren, die eine gegenseitige 
+Authentisierung beinhalten.
+\newline
+
+Einmalpasswörter basieren auf einer 1-Faktor-Authentisierung. Also fügt man bei den Verfahren mind. einen 2. Faktor
+hinzu.
+
 
 \end{document}
