@@ -116,10 +116,10 @@
 
 \section*{Aufgabe 1 - Seed-Generierung}
 \begin{itemize}
-  \item von der Theorie abhänging von einander
+  \item von der Theorie abhängig von einander
   \item praktisch nicht, da exakte Taktfrequenz nicht simuliert werden kann
   \item Systemstart und Prozessortakt ist unterschiedlich
-  \item dazu kommen unterschiede durch Netzwerkabhängigkeiten
+  \item dazu kommen Unterschiede durch Netzwerkabhängigkeiten
 \end{itemize}
 
 B und A,C,D sind offensichtlich unabhängig voneinander, weil dies zunächst 2 vollkommen unterschiedliche 
@@ -131,7 +131,7 @@ sollte eine Unabhängigkeit bestehen.
 \newline
 
 A,C und D sind zwar alles Aufrufe der selben Funktion, sind aber deshalb unabhängig voneinander, weil sie zu 
-vollkommenen Zeitpunkten aufgerufen werden. Es kann nicht garantiert werden, dass diese jeweils in gleichen 
+vollkommenen unterschiedlichen Zeitpunkten aufgerufen werden. Es kann nicht garantiert werden, dass diese jeweils in gleichen 
 zeitlichen Abständen voneinander aufgerufen werden (es sei denn, man führt eine Automatisierung dieser 
 Vorgänge ein). Je nach Auslastung und HW variieren also dort die zurückgekommenen Zeitpunkte und Werte. 
 Man kann lediglich sagen, dass $A \leq C \leq D$, weil nach zeitlichem Ablauf wesentlich mehr 
@@ -147,7 +147,7 @@ Prozessorzyklen erfolgt sind.
 \end{itemize}
 
 Zunächst hat man bei diesem Verfahren den Startwert Seed. Dieser dient als Input füt eine Hashfunktion. Das Ergebnis
-dessen ist wiederum Input für die nä. iterative Anwendung der Hashfunktion. Die in der VL kennen gerlernten krypto.
+dessen ist wiederum Input für die nä. iterative Anwendung der Hashfunktion. Die in der VL kennen gelernten krypto.
 Hashfunktionen sind dabei Einwegfunktionen. Dies bedeutet, für alle x H(x) effizient zu berechnen ist, für alle y
 jedoch ist es schwer, das m aus $H^{-1}$(y) zu finden. Da auch hierbei die Hashfunktion iterativ angewendet wird
 (Teilfolge ist Input für nä. Stufe), und diese Einwegfunktionen sind, ist es also nicht möglich, aus einer bel.
@@ -173,9 +173,9 @@ aus einer Teilfolge also nicht auf den Vorgänger bzw. Nachfolger schließen kan
 \section*{Aufgabe 3 - Instanzauthentisierung}
 \subsection*{Passwordlisten}
 \begin{itemize}
-  \item schutz vor Key-Loggin und Replay Attacken, da Passowrd nur einmalig
-    benutzt werden können und dannach verfallen
-  \item gegen Phiishing nicht sicher da Passwörter abgefangen und selbst
+  \item Schutz vor Key-Logging und Replay Attacken, da Passowrd nur einmalig
+    benutzt werden können und danach verfallen
+  \item gegen Phishing nicht sicher da Passwörter abgefangen und selbst
     benutzt werden können (Passwörter wurden im Echtsystem nicht genutzt und
     sind dadurch noch aktiv)
 \end{itemize}
@@ -184,12 +184,12 @@ aus einer Teilfolge also nicht auf den Vorgänger bzw. Nachfolger schließen kan
   \item  Phishing: ja. Falsche Website gibt sich als richtige aus und gelangt an TAN. Angreifer muss nun hoffen/dafür
   sorgen, dass Bank gleiches i abfragt wie er den Benutzer (oder Akkumulation vieler i von Benutzer)
   \item Key Logging: kriegt dann $p_{i}$ mit und somit erfolgreich. Verfällt ja aber nach Benutzung, deshalb eher
-  suboptimal für Angreifer, da dieser en Transfer von $p_{i}$  abbrechen müsste, damit er es schicken kann
+  suboptimal für Angreifer, da dieser den Transfer von $p_{i}$  abbrechen müsste, damit er es schicken kann
   \item Replay: nach Ausgabe des i. Passwortes wird dieses ja von der Liste gestrichen $\Rightarrow$ Angriff nicht
   möglich
 \end{itemize}
 
-\subsection*{Passwordgenerator}
+\subsection*{Zeitgesteuerte Passwordgenerator}
 \begin{itemize}
   \item im gegebenen Zeitintervall nicht vor Replay Attacken sicher (Passwort
     verfällt erst nach dem Zeitintervall und ist somit noch gültig)
@@ -200,7 +200,7 @@ aus einer Teilfolge also nicht auf den Vorgänger bzw. Nachfolger schließen kan
 
 \begin{itemize}
   \item  Phishing:  kriegt dann zwar das gesendete p, kennt jedoch das vorab ausgetauschte g nicht; schickt er aber
-  die Antwort immerhalb des Toleranz-Intervalls $\Rightarrow$  Angriff geglückt
+  die Antwort innerhalb des Toleranz-Intervalls $\Rightarrow$  Angriff geglückt
   \item Key Logging:  kriegt zwar dann die message mit, allerdings nicht den key, da der ja bereits vorab ausgetauscht
   worden ist
   \item Replay: generell nicht; innerhalb des Toleranzintervalls jedoch schon (in VL: 30 s)
