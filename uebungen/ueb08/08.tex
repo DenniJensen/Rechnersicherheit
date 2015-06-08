@@ -116,6 +116,51 @@
 
 \section*{Aufgabe 1 - HRU}
 
-\section*{Aufgabe 2 - Zugriffskontrolle}
+\section*{Aufgabe 2 - Zugriffskontrolle(Linux)}
+\subsection*{Welche Zugriffsrechte gibt es und was bedeuten diese?}
+\begin{description}
+  \item[Lesen / Read] \hfill \\
+    Erlaubt lesenden Zugriff auf die Datei. Bei einem Verzeichnis können damit
+    die Namen der enthaltenen Dateien und Ordner abgerufen werden (nicht jedoch
+    deren weitere Daten wie z.B. Berechtigungen, Besitzer, Änderungszeitpunkt,
+    Dateiinhalt etc.).
+  \item[Schreiben / Write] \hfill \\
+    Erlaubt schreibenden Zugriff auf eine Datei. Für ein Verzeichnis gesetzt,
+    können Dateien oder Unterverzeichnisse angelegt oder gelöscht werden, sowie
+    die Eigenschaften der enthaltenen Dateien/Verzeichnisse verändert werden.
+  \item[Ausführen / Execute] \hfill \\
+    Erlaubt das Ausführen einer Datei, wie das Starten eines Programms. Bei
+    einem Verzeichnis ermöglicht dieses Recht, in diesen Ordner zu wechseln und
+    weitere Attribute zu den enthaltenen Dateien abzurufen (sofern man die
+    Dateinamen kennt ist dies unabhängig vom Leserecht auf diesen Ordner).
+\end{description}
+
+\subsection*{Abstraktion: Benutzergruppen, Protection Rings}
+\subsubsection*{Benutzergruppen}
+Jeder Benutzer ist einer Hauptgruppe zugeordnet, kann daneben aber auch
+Mitglied weiterer Gruppen sein. Der Zugriff auf gewisse Hardware oder Dienste
+ist auf die Mitglieder einer bestimmten Gruppe beschränkt.
+
+Die Hauptgruppe eines Benutzers spielt im Zusammenhang mit den
+Zugriffsberechtigungen auf Dateien und Verzeichnisse eine Rolle. Jede Datei ist
+immer Eigentum genau eines Benutzers. Daneben ist den Dateien aber auch eine
+Gruppe zugeordnet. Wenn ein Benutzer eine Datei erzeugt, dann wird seine
+Hauptgruppe als Gruppe bei der erzeugten Datei eingetragen.
+
+
+\paragraph{Namenskonventionen}
+Die Namen von Benutzern und Gruppen unterliegen gewissen Einschränkungen:
+\begin{itemize}
+  \item Sie müssen mit einem Kleinbuchstaben beginnen.
+  \item Danach können weitere Kleinbuchstaben, Ziffern (0-9), - (Minuszeichen)
+    oder _ (Unterstrich) folgen. Zur Kompatibilität mit Konten auf
+    Samba-Rechnern wird außerdem \$ am Ende des Benutzernamens unterstützt.
+  \item Sie dürfen nur einmal auf dem System vergeben sein.
+\end{itemize}
+Diese Regeln sind in der Datei /etc/adduser.conf festgelegt.
+
+\subsection*{Wer legt fur was welche Zugriffsrechte fest}
+\subsection*{Wie wird die Zugriffsmatrix realisiert (Access Lists, Capabilities)}
+\subsection*{Wie wird die Zugriffsmatrix geschutzt (Reference Monitor)}
 
 \end{document}
