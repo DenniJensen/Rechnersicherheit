@@ -6,6 +6,6 @@
 *.nav
 *.snm
 *.toc
-*.vro
+*.vrb
 uebungen/ueb*/*.pdf
 uebungen/ueb*/*/*.pdf
