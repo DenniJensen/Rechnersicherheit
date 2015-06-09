@@ -161,6 +161,29 @@ Diese Regeln sind in der Datei /etc/adduser.conf festgelegt.
 
 \subsection*{Wer legt fur was welche Zugriffsrechte fest}
 \subsection*{Wie wird die Zugriffsmatrix realisiert (Access Lists, Capabilities)}
+
+\begin{itemize}
+  \item In Linux (sowie in Windows) realisiert durch Zugriffslisten (ACL). Unterschieden wird 
+  dabei zwischen Access ACL (Zugriffsrechte für Gruppen und Benutzer auf beliebige Dateisystemobjekte), 
+  Default ACL (Anwendung nur auf Verzeichnisse; Festlegung, welche Rechte vom übergeordneten
+  Verzeichnis geerbt werden können) .
+  \item Ein ACL Eintrag hat dabei im Grunde zwei verschiedene Formen – minimal und erweitert. Ein 
+  minimaler ACL-Eintrag besteht aus dem Typ owner, owning group und other. Eine erweiterte enthält 
+  noch einen sogenannten mask-Eintrag und darf damit mehrere Einträge des Typs named user und named 
+  group enthalten.
+  \item Quelle: \url{http://users.suse.com/~agruen/acl/chapter/fs_acl-de.pdf}
+\end{itemize}
+
 \subsection*{Wie wird die Zugriffsmatrix geschutzt (Reference Monitor)}
+
+\begin{itemize}
+  \item LSM ist ein Framework und eine Schnittstelle für einen reference monitor. Eine generelle 
+  Implementierung dieser Schnittstelle erfolgt im sogenannten SELinux. Generelles grobes Vorgehen: 
+  Aufruf von LSM hooks via Systemaufrufe; diese hooks besitzen Referenzen auf Linux Objekte 
+  Reference Monitor muss diese jeodch in konforme Authorisierungsqueries
+  transformieren; desweiteren müssen dieses Authorisierungsqueries für das Protection System 
+  verarbeitet werden
+  \item Quelle: \url{http://www.cse.psu.edu/~trj1/cse443-s12/docs/ch9.pdf}
+\end{itemize}
 
 \end{document}
