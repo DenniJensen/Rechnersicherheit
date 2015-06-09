@@ -3,4 +3,9 @@
 *.tmp
 *.log
 *.gz
+*.nav
+*.snm
+*.toc
+*.vro
 uebungen/ueb*/*.pdf
+uebungen/ueb*/*/*.pdf
