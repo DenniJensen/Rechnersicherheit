@@ -17,7 +17,7 @@
 
 % remove this line and the "ucs" option to the documentclass when your editor is not utf8-capable
 \usepackage[utf8x]{inputenc}    % to make utf-8 input possible
-\usepackage[english]{babel}     % hyphenation etc., alternatively use 'german' as parameter
+\usepackage[german]{babel}     % hyphenation etc., alternatively use 'german' as parameter
 \usepackage[inkscape={/usr/bin/inkscap‌​e -z -C}]{svg}
 \usepackage{amsmath}
 \include{fu-beamer-template}  % THIS is the line that includes the FU template!
@@ -85,29 +85,107 @@
 \end{itemize}
 \end{frame}
 
-\subsection{Test subtitle}
+\section{Zugriffsrechte}
 
-\begin{frame}{}
+\begin{frame}{Zugriffsrechte}
 \begin{itemize}
-\item test
+	\item lesen/ read
+		\begin{itemize}
+			\item erlaubt lesen einer Datei
+			\item abrufen von enthaltene Dateien
+		\end{itemize}
+	\item schreiben/ write
+		\begin{itemize}
+			\item erlaubt beschreiben einer Datei
+			\item erstellen oder löschen von Dateien
+			\item Eigenschaften enthaltener Dateien verändern 
+		\end{itemize}
+	\item ausführen/ execute
+		\begin{itemize}
+			\item ausführen von Dateien erlaubt
+			\item recht in ein Verzeichnis zu wechseln
+			\item Attribute von Dateien abrufen
+		\end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Test code frame}
-\begin{semiverbatim}
-Testcode
-\end{semiverbatim}
+\section{Benutzergruppen, Protection Rings}
+
+\subsection{Benutzergruppen}
+
+\begin{frame}{Benutzergruppen}
+\begin{itemize}
+\item jeder Benutzer in einer Hauptgruppe
+\item kann in beliebigen anderen Gruppen sein
+\item Hardwarezugriff auf Gruppen beschränkt
+\item jede Datei ist Eigentums eines Benutzers
+\item jede Datei ist einer Gruppe zugeordnet
+\item Datei erstellen $\rightarrow$ Hauptgruppe des Erstellers
+\end{itemize}
 \end{frame}
 
-\section{Test Section 2}
-
-\begin{frame}{}
-\begin{figure}
-\includegraphics[scale=0.5]{linux-logo}
-\caption{linux-logo}
-\end{figure}
+\begin{frame}{Namenskonventionen}
+\begin{itemize}
+\item beginnen mit Kleinbuchstaben
+\item gefolgt von a-z, -, \_
+\item möglich am Ende des Namen \$ (Kompatibilität Samba-Rechner)
+\item einzigartig
+\end{itemize}
+\begin{itemize}
+\item Regeln festgelegt in /etc/adduser.conf
+\end{itemize}
 \end{frame}
+
+\begin{frame}{Protection Rings}
+
+\end{frame}
+
+\section{Zugriffsmatrix Realisation}
+
+\begin{frame}{Zugriffsmatrix Realisation}
+\begin{itemize}
+\item Zugriffslisten ACL
+\item Access ACL
+	\begin{itemize}
+		\item Zugriffsrecht von Gruppen und Benutzern auf beliebige Dateisystemobjekte
+	\end{itemize}
+\item Default ACL
+	\begin{itemize}
+		\item nur auf Verzeichnisse
+		\item welche Recht vom übergeordneten Verzeichnis geerbt
+	\end{itemize}
+\item ACL Eintrag
+	\begin{itemize}
+		\item minimal - owner, group, other
+		\item erweitert - mask-Eintrag, named users, named groups
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Zugriffsmatrix Schutz (Reference Monitor)}
+
+\begin{frame}{Zugriffsmatrix Schutz (Reference Monitor)}
+\begin{itemize}
+\item LSM - Framework und Schnittstelle für Reference Monitor
+\item Implementierung im SELinux
+\end{itemize}
+\end{frame}
+
+%\begin{frame}[fragile]
+%  \frametitle{Test code frame}
+%\begin{semiverbatim}
+%Testcode
+%\end{semiverbatim}
+%\end{frame}
+
+%\section{Test Section 2}
+
+%\begin{frame}{}
+%\begin{figure}
+%\includegraphics[scale=0.5]{linux-logo}
+%\caption{linux-logo}
+%\end{figure}
+%\end{frame}
 
 
 
