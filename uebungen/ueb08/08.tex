@@ -115,6 +115,33 @@
 
 
 \section*{Aufgabe 1 - HRU}
+Folgende Lücke im Beweis: wie kommen wir von der Seite 68 mit den Behauptungen
+\begin{itemize}
+  \item $c_{1}$, ..., $c_{t}$ sind keine delete-Kommandos
+  \item Höchstens $c_{1}$ kann ein create-Kommando sein
+\end{itemize}
+
+zu den auf Seite 69 genannten Behauptungen
+\begin{itemize}
+  \item $c_{1}$ ist create-Kommando und $c_{2}$ bis $c_{t}$ sind enter-Kommandos
+  \item $c_{1}$, ..., $c_{t}$ sind enter-Kommandos
+\end{itemize}
+
+Dazu lassen sich bei Betrachtung der Basisoperationen folgende Beobachtungen vornehmen:
+
+Wird ein create-Kommando durchgeführt, so erzeugt dies lediglich die Datei (ein Objekt). 
+Es können jedoch keinerlei Rechte gesetzt werden. Mehrfaches Ausführen von create führt also 
+zu Dateien ohne Rechte. Identifiziert werden diese Dateien jedoch durch ihre jeweiligen Rechte 
+(in der Zugriffsmatrix). Durch das oben genannte Anlegen von Daten ohne Rechten sind quasi 
+alle Daten äquivalent und können somit auf ein einziges create-Statement reduziert werden.
+
+Mit den gegebenen Basisoperatoren kann man lediglich das Vorhandensein von Rechten prüfen. 
+Es kann aber nicht umgekehrt geprüft werden, ob Rechte fehlen. Operationen wie "delete" 
+haben keinerlei Auswirkungen, sofern r nicht existiert. Gleiches gilt für die Kommandos 
+"destroy". Somit können diese für die Betrachtung ignoriert werden.
+
+Somit kann man die auf Seite 68 genannten Aussagen auf die auf Seite 69 reduzieren.
+
 
 \section*{Aufgabe 2 - Zugriffskontrolle(Linux)}
 \subsection*{Welche Zugriffsrechte gibt es und was bedeuten diese?}
