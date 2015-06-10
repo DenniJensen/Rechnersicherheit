@@ -129,15 +129,15 @@ zu den auf Seite 69 genannten Behauptungen
 
 Dazu lassen sich bei Betrachtung der Basisoperationen folgende Beobachtungen vornehmen:
 
-Wird ein create-Kommando durchgeführt, so erzeugt dies lediglich die Datei (ein Objekt). 
-Es können jedoch keinerlei Rechte gesetzt werden. Mehrfaches Ausführen von create führt also 
-zu Dateien ohne Rechte. Identifiziert werden diese Dateien jedoch durch ihre jeweiligen Rechte 
-(in der Zugriffsmatrix). Durch das oben genannte Anlegen von Daten ohne Rechten sind quasi 
+Wird ein create-Kommando durchgeführt, so erzeugt dies lediglich die Datei (ein Objekt).
+Es können jedoch keinerlei Rechte gesetzt werden. Mehrfaches Ausführen von create führt also
+zu Dateien ohne Rechte. Identifiziert werden diese Dateien jedoch durch ihre jeweiligen Rechte
+(in der Zugriffsmatrix). Durch das oben genannte Anlegen von Daten ohne Rechten sind quasi
 alle Daten äquivalent und können somit auf ein einziges create-Statement reduziert werden.
 
-Mit den gegebenen Basisoperatoren kann man lediglich das Vorhandensein von Rechten prüfen. 
-Es kann aber nicht umgekehrt geprüft werden, ob Rechte fehlen. Operationen wie "delete" 
-haben keinerlei Auswirkungen, sofern r nicht existiert. Gleiches gilt für die Kommandos 
+Mit den gegebenen Basisoperatoren kann man lediglich das Vorhandensein von Rechten prüfen.
+Es kann aber nicht umgekehrt geprüft werden, ob Rechte fehlen. Operationen wie "delete"
+haben keinerlei Auswirkungen, sofern r nicht existiert. Gleiches gilt für die Kommandos
 "destroy". Somit können diese für die Betrachtung ignoriert werden.
 
 Somit kann man die auf Seite 68 genannten Aussagen auf die auf Seite 69 reduzieren.
@@ -187,16 +187,18 @@ Die Namen von Benutzern und Gruppen unterliegen gewissen Einschränkungen:
 Diese Regeln sind in der Datei /etc/adduser.conf festgelegt.
 
 \subsection*{Wer legt fur was welche Zugriffsrechte fest}
+Jeder nutzer der mindestens die Rechnte hat, kann diese auch dann festlegen.
+
 \subsection*{Wie wird die Zugriffsmatrix realisiert (Access Lists, Capabilities)}
 
 \begin{itemize}
-  \item In Linux (sowie in Windows) realisiert durch Zugriffslisten (ACL). Unterschieden wird 
-  dabei zwischen Access ACL (Zugriffsrechte für Gruppen und Benutzer auf beliebige Dateisystemobjekte), 
+  \item In Linux (sowie in Windows) realisiert durch Zugriffslisten (ACL). Unterschieden wird
+  dabei zwischen Access ACL (Zugriffsrechte für Gruppen und Benutzer auf beliebige Dateisystemobjekte),
   Default ACL (Anwendung nur auf Verzeichnisse; Festlegung, welche Rechte vom übergeordneten
   Verzeichnis geerbt werden können) .
-  \item Ein ACL Eintrag hat dabei im Grunde zwei verschiedene Formen – minimal und erweitert. Ein 
-  minimaler ACL-Eintrag besteht aus dem Typ owner, owning group und other. Eine erweiterte enthält 
-  noch einen sogenannten mask-Eintrag und darf damit mehrere Einträge des Typs named user und named 
+  \item Ein ACL Eintrag hat dabei im Grunde zwei verschiedene Formen – minimal und erweitert. Ein
+  minimaler ACL-Eintrag besteht aus dem Typ owner, owning group und other. Eine erweiterte enthält
+  noch einen sogenannten mask-Eintrag und darf damit mehrere Einträge des Typs named user und named
   group enthalten.
   \item Quelle: \url{http://users.suse.com/~agruen/acl/chapter/fs_acl-de.pdf}
 \end{itemize}
@@ -204,11 +206,11 @@ Diese Regeln sind in der Datei /etc/adduser.conf festgelegt.
 \subsection*{Wie wird die Zugriffsmatrix geschutzt (Reference Monitor)}
 
 \begin{itemize}
-  \item LSM ist ein Framework und eine Schnittstelle für einen reference monitor. Eine generelle 
-  Implementierung dieser Schnittstelle erfolgt im sogenannten SELinux. Generelles grobes Vorgehen: 
-  Aufruf von LSM hooks via Systemaufrufe; diese hooks besitzen Referenzen auf Linux Objekte 
-  Reference Monitor muss diese jedoch in konforme Authorisierungsqueries
-  transformieren; desweiteren müssen dieses Authorisierungsqueries für das Protection System 
+  \item LSM ist ein Framework und eine Schnittstelle für einen reference monitor. Eine generelle
+  Implementierung dieser Schnittstelle erfolgt im sogenannten SELinux. Generelles grobes Vorgehen:
+  Aufruf von LSM hooks via Systemaufrufe; diese hooks besitzen Referenzen auf Linux Objekte
+  Reference Monitor muss diese jeodch in konforme Authorisierungsqueries
+  transformieren; desweiteren müssen dieses Authorisierungsqueries für das Protection System
   verarbeitet werden
   \item Quelle: \url{http://www.cse.psu.edu/~trj1/cse443-s12/docs/ch9.pdf}
 \end{itemize}
