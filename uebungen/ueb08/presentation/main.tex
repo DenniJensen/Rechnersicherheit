@@ -77,13 +77,13 @@
   % You might wish to add the option [pausesections]
 \end{frame}
 
-\section{Introduction}
+%\section{Introduction}
 
-\begin{frame}{title of frame} %title in brace
-\begin{itemize}
-\item test item
-\end{itemize}
-\end{frame}
+%\begin{frame}{title of frame} %title in brace
+%\begin{itemize}
+%\item test item
+%\end{itemize}
+%\end{frame}
 
 \section{Zugriffsrechte}
 
@@ -106,6 +106,15 @@
 			\item recht in ein Verzeichnis zu wechseln
 			\item Attribute von Dateien abrufen
 		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Zugriffsrechte ändern und setzen}
+\begin{itemize}
+	\item möglich nur mit root rechten
+	\item chgrp - Gruppe ändern 
+	\item chown - Besitzer oder/ und Gruppe ändern
+	\item chmod - Rechte ändern
 \end{itemize}
 \end{frame}
 
@@ -137,7 +146,10 @@
 \end{frame}
 
 \begin{frame}{Protection Rings}
-
+\begin{figure}
+\includegraphics[scale=0.3]{protectionRings}
+\caption{Quelle \url{http://ptgmedia.pearsoncmg.com/images/chap5_9780789749574/elementLinks/05fig04_alt.jpg}}
+\end{figure}
 \end{frame}
 
 \section{Zugriffsmatrix Realisation}
@@ -168,6 +180,13 @@
 \begin{itemize}
 \item LSM - Framework und Schnittstelle für Reference Monitor
 \item Implementierung im SELinux
+\item vorgehen:
+	\begin{itemize}
+		\item LSM hooks via Systemaufrufe
+		\item hook besitzt Referenz auf Linux Objekte
+		\item in konforme Authorisierungsqueries transformieren
+		\item Authorisierungsqueries für Protektion System verarbeitet
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -202,9 +221,15 @@
   \beamertemplatearticlebibitems
   % Followed by interesting articles. Keep the list short. 
 
-  \bibitem{}
-    % author, title, date ...
-    \newblock \url{}  
+  \bibitem{PR}
+    Protection Ring Picture
+    \newblock \url{http://ptgmedia.pearsoncmg.com/images/chap5_9780789749574/elementLinks/05fig04_alt.jpg}
+  \bibitem{ACL}
+    Access Control Lists unter Linux
+    \newblock \url{http://users.suse.com/~agruen/acl/chapter/fs_acl-de.pdf}  
+  \bibitem{LSM}
+    Case Study: Building a Secure Operating System for Linux
+    \newblock \url{http://www.cse.psu.edu/~trj1/cse443-s12/docs/ch9.pdf}  
   \end{thebibliography}
 \end{frame}
 
