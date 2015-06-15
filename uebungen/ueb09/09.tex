@@ -1,0 +1,163 @@
+\documentclass{scrartcl}
+
+\usepackage{graphicx} % Required for the inclusion of images
+
+\renewcommand{\labelenumi}{\alph{enumi}.}
+% deutsche Sprache und Umlaute
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel}
+
+
+%BibTex verweise
+\usepackage{cite}
+
+% für url pfade
+\usepackage{url}
+
+% setzt beim neuen Absatz das erste Wort 4 mm nach rechts \\ kleine Abstand vom Rand
+\setlength{\parindent}{4mm}
+
+%für boxen
+\usepackage{pifont,mdframed}
+
+\usepackage{microtype}
+
+% hack für scr paket für Indexierung
+\usepackage{scrhack}
+
+% erzwingen der Positionierung
+\usepackage{float}
+\restylefloat{figure}
+
+% Verbindungen vom Index, Tabellen und Abbildungen
+\usepackage{hyperref}
+
+%Tiefe des Inhaltsverzeichnis
+\setcounter{tocdepth}{5}
+
+%für Unterstriche
+\usepackage{underscore}
+
+% Beschriftung
+\usepackage{caption}
+\captionsetup{%
+  font=small,
+  labelfont=bf,
+}
+
+\usepackage{fancybox}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=20mm,bmargin=25mm,lmargin=15mm,rmargin=20mm}
+% Set up the images/graphics package
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% listing
+\usepackage{listings}
+\usepackage{color}
+\definecolor{grey}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\tiny,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML} {
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}
+}
+
+\makeatletter
+\newenvironment{CenteredBox}{%
+\begin{Sbox}}{% Save the content in a box
+\end{Sbox}\centerline{\parbox{\wd\@Sbox}{\TheSbox}}}% And output it centered
+\makeatother
+
+
+
+\title{Rechnersicherheit - Übung 09}
+\author{Martin Görick, Dennis Hägler und Kai Kriedemann \\ Tutor: Stefan Pfeiffer}
+%\date{\today}  % if the \date{} command is left out, the current date will be used
+
+
+\begin{document}
+\maketitle
+
+
+\section*{Aufgabe 1 - Bell-LaPadula}
+Damit die formulierten Ziele erfüllt werden, müssen ii und iii um folgendes erweitert werden.
+
+\begin{itemize}
+\item[ii] $sc(o) \leq sc(s)$, Die Sicherheitsklasse des Objektes muss kleiner oder gleich der Sicherheitsklasse des Subjektes sein, damit \textit{no read up} in den Sicherheitsklassen gewährleistet ist.
+\item[iii] $sc(s) \leq sc(o)$, Damit das \textit{no write down} Prinzip gewährleistet ist, muss die Sicherheitsklasse des Objekts gleich oder größer als die des Subjekts sein.
+\end{itemize}
+
+\section*{Aufgabe 2 - Biba-Integrity-Model}
+
+Das Bell-LaPadula Modell wird um Integrität Klassen erweitert. Diese sind ähnlich der Sicherheitsklassen, aber unabhängig von diesen.
+
+\begin{itemize}
+\item \textbf{kritisch} - wenn die Informationen von nicht authentisieren Personen modifiziert werden, können diese die Nationale Sicherheit \underline{sehr schwer beschädigen}.
+\item \textbf{sehr wichtig} - wenn die Informationen von nicht authentisieren Personen modifiziert werden, können diese die Nationale Sicherheit \underline{ernst beschädigen}.
+\item \textbf{wichtig} - wenn die Informationen von nicht authentisieren Personen modifiziert werden, können diese die Nationale Sicherheit \underline{beschädigen}
+\end{itemize}
+
+Dazu werden die Methoden zum festlegen der Integrität ($il(s)$),vergleichen, ob die Integritäten kleiner gleich sind oder ob ein Subjekt ein anderen Subjekt aufrufen darf.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{c|c|c|c}
+ & $sl(s) \leq sl(o)$ & $cl(s) = cl(o)$ & $cl(o) \leq cl(s)$ \\
+ \hline
+ $il(s) \leq il(o)$ & & read & read \\
+ \hline
+ $il(s) = il(o)$ & write &  read,write & read \\
+\hline
+$il(o) \leq il(s)$ & write & write & \\
+\end{tabular}
+\end{center}
+\caption{Sicherheit und Integrität Einschränkungen}
+\label{tab:2}
+\end{table}
+
+Wie in der Tabelle \ref{tab:2} zu sehen, wird im Bell-LaPaluda Modell statt nur die Sicherheitsklassen zu testen auch die Intengritätsklassen verglichen.
+
+\section*{Aufgabe 3 - Flickercode}
+
+\begin{itemize}
+\item \texttt{Phishing:}
+\item \texttt{Key-Logging:}
+\item \texttt{Replay:}
+\end{itemize}
+
+\end{document}
