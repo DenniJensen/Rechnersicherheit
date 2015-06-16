@@ -12,7 +12,7 @@
 \usepackage{cite}
 
 % für url pfade
-\usepackage{url}
+\usepackage[hyphens]{url}
 
 % setzt beim neuen Absatz das erste Wort 4 mm nach rechts \\ kleine Abstand vom Rand
 \setlength{\parindent}{4mm}
@@ -155,9 +155,9 @@ Wie in der Tabelle \ref{tab:2} zu sehen, wird im Bell-LaPaluda Modell statt nur 
 \section*{Aufgabe 3 - Flickercode}
 
 \begin{itemize}
-\item \texttt{Phishing:}
-\item \texttt{Key-Logging:}
-\item \texttt{Replay:}
+\item \texttt{Phishing:} Nicht möglich, da der Angreifer den genauen Flickercode der \textit{falschen} Überweisung benötigt, welche die Bank generiert um damit die TAN für diese zu erhalten.  
+\item \texttt{Key-Logging:} Da die TAN nur für eine Überweisung gilt bringt ihm das Logging der TAN nicht, jedoch wenn er es schafft einen Keylogger zu installieren, dann eventuell auch einen Trojaner und damit wurde dieses Verfahren durch falsche Anzeigen am Bildschirm, Anwender rein gelegt. (Quelle: \url{http://www.heise.de/security/meldung/Online-Banking-Trojaner-hat-es-auf-chipTAN-Nutzer-abgesehen-1701184.html})
+\item \texttt{Replay:} Geht nicht, da die TAN nur einmal gültig ist.
 \end{itemize}
 
 \end{document}
