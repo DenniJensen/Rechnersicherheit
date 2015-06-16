@@ -171,7 +171,15 @@ durch falsche Anzeigen am Bildschirm, Anwender rein gelegt. (Quelle: \url{http:/
 e-Banking-Trojaner-hat-es-auf-chipTAN-Nutzer-abgesehen-1701184.html})
 
 Loggt der Angreifer die Details der Transaktion mit (falls Daten am PC und nicht am Gerät eingegeben werden), fehlt ihm jedoch der Flickercode bzw. die optische Übertragung der Signale; somit hat er keinerlei Chancen
+
 \item \texttt{Replay:} Geht nicht, da die TAN nur einmal gültig ist.
+
+Hier schneidet ein Angreifer einen vergangenen Flickercode (Startcode, Kontonr. Empfänger, Überweisungsbetrag;
+verschlüsselt in einer Grafik) mit. Selbst, wenn dies gelingen würde (hypothetisch: Bank hat keinerlei Maßnahmen gegen
+alte Transaktionen), muss der TAN-Generator des originalen Benutzers eine TAN generieren und manuell freigeben. Bank
+überprüft dann, ob der TAN passt. Da der Angreifer das Gerät aber nicht hat bzw. die passende Karte nicht, gelingt
+dies nicht, da er keine TAN hat. 
+Schneidet der Angreifer nun eine TAN mit, so hat er auch hier keinerlei Chancen, da die TANs Einmal-TANs sind.
 
 
 \end{itemize}
