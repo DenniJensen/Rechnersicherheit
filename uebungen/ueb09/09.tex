@@ -156,8 +156,32 @@ Wie in der Tabelle \ref{tab:2} zu sehen, wird im Bell-LaPaluda Modell statt nur 
 
 \begin{itemize}
 \item \texttt{Phishing:} Nicht möglich, da der Angreifer den genauen Flickercode der \textit{falschen} Überweisung benötigt, welche die Bank generiert um damit die TAN für diese zu erhalten.  
-\item \texttt{Key-Logging:} Da die TAN nur für eine Überweisung gilt bringt ihm das Logging der TAN nicht, jedoch wenn er es schafft einen Keylogger zu installieren, dann eventuell auch einen Trojaner und damit wurde dieses Verfahren durch falsche Anzeigen am Bildschirm, Anwender rein gelegt. (Quelle: \url{http://www.heise.de/security/meldung/Online-Banking-Trojaner-hat-es-auf-chipTAN-Nutzer-abgesehen-1701184.html})
+
+Ist zwar immer noch möglich (falsche Website, kriegt Details der Transaktion durch Übertragung des Flickercodes);
+allerdings kann/muss der Kunde vor dem Abschicken die Details noch einmal überprüfen; dort sollte eine Manipulation
+sofort auffallen (man sieht Summe, Ziel-Kontonr.,etc.); Schwierigkeiten machen mehrere Überweisungen bei Verwendung
+einer TAN; dort ist es nicht möglich, Details wie Empfänger und co, sondern lediglich die Gesamtsumme zu sehen; somit
+wären hier Manipulationen möglich; eine weitere Möglichkeit ist es, eine einzelene Überweisung in eine Gruppenüberwei
+sung von 1 umzuwandeln; dann wird bei der finalen Bestätigung dort ebenfalls die Ziel-Kontonr. nicht angezeigt; auch
+dies sollte dem Bestätiger auffallen; beide Fälle wurden aber bereits von den Banken behoben
+
+\item \texttt{Key-Logging:} Da die TAN nur für eine Überweisung gilt bringt ihm das Logging der TAN nicht, jedoch wenn
+er es schafft einen Keylogger zu installieren, dann eventuell auch einen Trojaner und damit wurde dieses Verfahren
+durch falsche Anzeigen am Bildschirm, Anwender rein gelegt. (Quelle: \url{http://www.heise.de/security/meldung/Onlin
+e-Banking-Trojaner-hat-es-auf-chipTAN-Nutzer-abgesehen-1701184.html})
+
+Loggt der Angreifer die Details der Transaktion mit (falls Daten am PC und nicht am Gerät eingegeben werden), fehlt ihm jedoch der Flickercode bzw. die optische Übertragung der Signale; somit hat er keinerlei Chancen
+
 \item \texttt{Replay:} Geht nicht, da die TAN nur einmal gültig ist.
+
+Hier schneidet ein Angreifer einen vergangenen Flickercode (Startcode, Kontonr. Empfänger, Überweisungsbetrag;
+verschlüsselt in einer Grafik) mit. Selbst, wenn dies gelingen würde (hypothetisch: Bank hat keinerlei Maßnahmen gegen
+alte Transaktionen), muss der TAN-Generator des originalen Benutzers eine TAN generieren und manuell freigeben. Bank
+überprüft dann, ob der TAN passt. Da der Angreifer das Gerät aber nicht hat bzw. die passende Karte nicht, gelingt
+dies nicht, da er keine TAN hat. 
+Schneidet der Angreifer nun eine TAN mit, so hat er auch hier keinerlei Chancen, da die TANs Einmal-TANs sind.
+
+
 \end{itemize}
 
 \end{document}
