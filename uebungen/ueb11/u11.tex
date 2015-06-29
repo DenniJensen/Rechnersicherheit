@@ -121,7 +121,32 @@
 
 
 
-\section*{Aufgabe 3 - Overflow}
+\section*{Aufgabe 3 - Wie kann Overflow verhindert werden}
+\subsubsection{Programmierer}
+  \begin{itemize}
+    \item genug Speicher reservieren
+    \item sorgfälltig mit der Pointern umgehen
+    \item dynamischen input auf Speicherüberlauf testen
+    \item Nutzung von Programmiersprachen mit integriertem Schutz (z.B. Java),
+      die die Grenzen des Speichers überwachen
+  \end{itemize}
+
+\subsubsection{Compiler}
+  \begin{itemize}
+    \item Überprüfungscode-Erzeugung
+    \item Einfügen einer Zufallszahl zwischen Rücksprungadresse und lokalen
+      Variablen (wird bei jeden Unterprogrammaufruf eingefügt. Wird diese
+      Zufallszahl von Unterprogramm verändert wird der jeweiligen
+      Rücksprungaddresse nicht mehr getraut)
+    \item Kopie der Rücksprungadresse, diese Adresse wird dann genutzt, was das
+      Aussnutzen von Bufferoverflows erschwert
+  \end{itemize}
+\subsubsection{Betriebssystem}
+  \begin{itemize}
+    \item  gleichzeitig nicht mehr Speicher zur Verfügung gestellt wird, als der
+      lineare Adressraum groß
+    \item Nullteterminierung des Zielstrings (OpenBSD)
+  \end{itemize}
 
 
 \section*{Aufgabe 4 - ROP}
