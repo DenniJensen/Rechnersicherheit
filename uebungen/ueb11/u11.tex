@@ -116,32 +116,51 @@
 
 \section*{Aufgabe 1 - Rainbow Tables}
 
+Rainbow Tables dienen zum Berechnen möglicher Passwort-Hash Paaren.
+Da die Hashfunktionen bekannt sind, kann man zu jedem Klartext ein Hash erzeugen.
+Nun wird aus einem Initialpasswort der Hash berechnet und aus diesem Hash über eine Reduktionsfunktion ein neues mögliches Passwort generiert.
+von dem neuem Passwort wird wieder der Hashwert berechnet.
+Die wird je nach Implementierung mehrmals wiederholt.
+Das ganze Verfahren wird für mehre Initialpasswörter durchgeführt, um viele mögliche Passwörter zu erhalten.
+Das größte Problem dabei sind Kollisionen, das mehrere Initialpasswörter auf den selben Endwert stoßen.
+Um dies zu verhindern, wird für jede Reduktion eine andere Funktion verwendet.
+
+
+Damit Speicherplatz gespart wird, werden oft nur die Initialpasswörter und der letzte Hash gespeichert. 
+Dies ist der Time-Memory-Tradeoff.
+Es wird der Speicherplatz gespart, jedoch muss die Tabelle neu berechnet werden.
+
+
+Es ist sinnvoll Rainbow Tabelle einzusetzen, wenn ein Bruteforce Angriff nicht rentabel ist.
+
+
+Um das Sicherheit auch von kleinen Passwörtern, kann ein \textit{Salt} verwendet werden und die Hashfunktionen mehrmals angewendet.
 
 \section*{Aufgabe 2 - Android-Sicherheit}
 
 
 
 \section*{Aufgabe 3 - Wie kann Overflow verhindert werden}
-\subsubsection{Programmierer}
+\subsubsection*{Programmierer}
   \begin{itemize}
     \item genug Speicher reservieren
-    \item sorgfälltig mit der Pointern umgehen
+    \item sorgfältig mit der Pointern umgehen
     \item dynamischen input auf Speicherüberlauf testen
     \item Nutzung von Programmiersprachen mit integriertem Schutz (z.B. Java),
       die die Grenzen des Speichers überwachen
   \end{itemize}
 
-\subsubsection{Compiler}
+\subsubsection*{Compiler}
   \begin{itemize}
     \item Überprüfungscode-Erzeugung
     \item Einfügen einer Zufallszahl zwischen Rücksprungadresse und lokalen
       Variablen (wird bei jeden Unterprogrammaufruf eingefügt. Wird diese
       Zufallszahl von Unterprogramm verändert wird der jeweiligen
-      Rücksprungaddresse nicht mehr getraut)
+      Rücksprungadresse nicht mehr getraut)
     \item Kopie der Rücksprungadresse, diese Adresse wird dann genutzt, was das
-      Aussnutzen von Bufferoverflows erschwert
+      Ausnutzen von Bufferoverflows erschwert
   \end{itemize}
-\subsubsection{Betriebssystem}
+\subsubsection*{Betriebssystem}
   \begin{itemize}
     \item  gleichzeitig nicht mehr Speicher zur Verfügung gestellt wird, als der
       lineare Adressraum groß
