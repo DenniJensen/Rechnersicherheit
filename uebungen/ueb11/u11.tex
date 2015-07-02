@@ -116,27 +116,46 @@
 
 \section*{Aufgabe 1 - Rainbow Tables}
 
-Rainbow Tables dienen zum Berechnen möglicher Passwort-Hash Paaren.
-Da die Hashfunktionen bekannt sind, kann man zu jedem Klartext ein Hash erzeugen.
-Nun wird aus einem Initialpasswort der Hash berechnet und aus diesem Hash über eine Reduktionsfunktion ein neues mögliches Passwort generiert.
-von dem neuem Passwort wird wieder der Hashwert berechnet.
-Die wird je nach Implementierung mehrmals wiederholt.
-Das ganze Verfahren wird für mehre Initialpasswörter durchgeführt, um viele mögliche Passwörter zu erhalten.
-Das größte Problem dabei sind Kollisionen, das mehrere Initialpasswörter auf den selben Endwert stoßen.
-Um dies zu verhindern, wird für jede Reduktion eine andere Funktion verwendet.
+Rainbow Tables dienen zum Berechnen möglicher Passwort-Hash Paaren.  Da die
+Hashfunktionen bekannt sind, kann man zu jedem Klartext ein Hash erzeugen.  Nun
+wird aus einem Initialpasswort der Hash berechnet und aus diesem Hash über eine
+Reduktionsfunktion ein neues mögliches Passwort generiert.  von dem neuem
+Passwort wird wieder der Hashwert berechnet.  Die wird je nach Implementierung
+mehrmals wiederholt.  Das ganze Verfahren wird für mehre Initialpasswörter
+durchgeführt, um viele mögliche Passwörter zu erhalten.  Das größte Problem
+dabei sind Kollisionen, das mehrere Initialpasswörter auf den selben Endwert
+stoßen.  Um dies zu verhindern, wird für jede Reduktion eine andere Funktion
+verwendet.
 
 
-Damit Speicherplatz gespart wird, werden oft nur die Initialpasswörter und der letzte Hash gespeichert. 
-Dies ist der Time-Memory-Tradeoff.
-Es wird der Speicherplatz gespart, jedoch muss die Tabelle neu berechnet werden.
+Damit Speicherplatz gespart wird, werden oft nur die Initialpasswörter und der
+letzte Hash gespeichert.  Dies ist der Time-Memory-Tradeoff.  Es wird der
+Speicherplatz gespart, jedoch muss die Tabelle neu berechnet werden.
 
 
-Es ist sinnvoll Rainbow Tabelle einzusetzen, wenn ein Bruteforce Angriff nicht rentabel ist.
+Es ist sinnvoll Rainbow Tabelle einzusetzen, wenn ein Bruteforce Angriff nicht
+rentabel ist.
 
 
-Um das Sicherheit auch von kleinen Passwörtern, kann ein \textit{Salt} verwendet werden und die Hashfunktionen mehrmals angewendet.
+Um das Sicherheit auch von kleinen Passwörtern, kann ein \textit{Salt}
+verwendet werden und die Hashfunktionen mehrmals angewendet.
 
 \section*{Aufgabe 2 - Android-Sicherheit}
+\subsubsection{Android root-Möglichkeiten}
+\begin{itemize}
+  \item ausnutzen von Bugs in Firmware um vollen Zugriff auf das Gerät zu haben
+  \item nutzung von Bootloadern (einschleusen der Software vor dem Systemstart
+    ermöglicht Zugriffrechte als Root)
+  \item Super SU ist eine Applikation (Bootloader) die vor dem Android
+    Betriebssystem gestartet werden kann
+  \item Apps die root rechte benötigen, müssen diese auch preigeben
+  \item sollte eine App den Zugriff erhalten, kann sie auf das komplette
+    Telefon zugriefen. Apps mit Rootrechten können alles Ausführen ohne
+    mit weiteren Zustimmung des Users(Steuerung des LED Pannels,
+    Netzwerküberwachung usw.).
+\end{itemize}
+
+\subsubsection{Angreifer bringt nutzer zum rooten}
 
 
 
