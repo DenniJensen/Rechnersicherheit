@@ -27,7 +27,7 @@ Für unsere Untersuchung betrachten wir 3 Angreifertypen
 ####TCP/IP Referenzmodell
 
 OSI - Layer | TCP/IP Layer |
-------
+--|--||--
 7 -5 | Application Layer | http, ftp, smtp, ...
 4 | Transport Layer | TCP, UDP
 3 | Internet Layer | IPv4, IPv6
@@ -51,14 +51,14 @@ MAC Adressen |IP-Header IP-Adressen | TCP-Header Ports, Sequenzenummer | Nutzlas
 ######Transport Layer Security (TLS)
 
 Bietet
-1) Symmetrische Verschlüsselung der Nutzlast (AES, Triple-DES)
-2) Datenauthentisierung der Nutzlast (HMAC)
+1. Symmetrische Verschlüsselung der Nutzlast (AES, Triple-DES)
+2. Datenauthentisierung der Nutzlast (HMAC)
 
 Application Layer --- Handshake Prot. | Change Cipher Prot | Alert Prot |
 Application Data Prot. --- Record Prot. (Verschlüsselung + Authen.)--- TCP
 
-1) Client: Random r_1
-2) Client -> Server: Client_hallo
+1. Client: Random r_1
+2. Client -> Server: Client_hallo
    - tls-Version
    - time, r_1
    - session_id,
@@ -66,31 +66,32 @@ Application Data Prot. --- Record Prot. (Verschlüsselung + Authen.)--- TCP
    - (Alg. für Instanz- und Datenauth, Schlüsseleinigung, Verschlüsselung)
    - Bsp1: TLS_RSA_with_AES_128_CBC_Sha256
    - Bsp2: TlS_DHE_RSA_...
-3) Server: Random r_2
-4) Server -> Client: Server_hallo
+3. Server: Random r_2
+4. Server -> Client: Server_hallo
    - tls-Version
    - time
    - r_2
    - session_id
    - Cipher_suite (ausgewählt)
-5) Server -> Client: Server-Zertifikat C_s (pk_s)
-6) Server -> Client: Demand Client-Zertifikat (Optional)
-7) Client: Verify Server Zertifikat
+5. Server -> Client: Server-Zertifikat C_s (pk_s)
+6. Server -> Client: Demand Client-Zertifikat (Optional)
+7. Client: Verify Server Zertifikat
    - Root Zertifikat zum Validieren werden mit Browser mitgeliefert
-8) Client -> Server: Client-Zertifikat C_c (pk_c) (Optional)
-9) Server: Verify C_c (Optional)
-10) Client: Signatur über alle bisherigen Daten (mit sk_c) --> Server (Optional)
-11a) Fall DHE: Client <-> Server
+8. Client -> Server: Client-Zertifikat C_c (pk_c) (Optional)
+9. Server: Verify C_c (Optional)
+10. Client: Signatur über alle bisherigen Daten (mit sk_c) --> Server (Optional)
+11.
+ * Fall 1 DHE: Client <-> Server
      - Austausch eines Geheimnisses G uber auth. Diffie-Hellman
      - Signatur über sk_s und (Optional sk_c)
      - Ableitung eines Pre Master Key aus G, r_1 und r_2
-11b) Fall RSA: Client -> Server
+ * Fall 2 RSA: Client -> Server
      - Client generiert Pre Master Key PMK aus zufällen r_1, r_2 und weiteren
        Zufall
      - Client schickt PMK verschlüsselt (mit pk_s) an den Server
-12) Client, Server: Ableitung von Verschlüsselungs-, Datenauth.-schlüssel und
+12. Client, Server: Ableitung von Verschlüsselungs-, Datenauth.-schlüssel und
 IV
-13) Client <-> Server:
+13. Client <-> Server:
     - Change Cipher Spec (ab jetzt wird verschlüsselt und authentisiert)
     - Hashwerte aller bisher ausgetauschten Daten (Kontrolle)
 
