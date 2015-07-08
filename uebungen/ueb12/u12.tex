@@ -81,7 +81,7 @@
 \definecolor{cyan}{rgb}{0.0,0.6,0.6}
 
 \lstset{
-  basicstyle=\tiny,
+  basicstyle=\small,
   columns=fullflexible,
   showstringspaces=false,
   commentstyle=\color{gray}\upshape
@@ -115,11 +115,49 @@
 
 
 \section*{Aufgabe 1 - RFC7525}
+\begin{itemize}
+  \item[1.] Zum Beispiel in der Email übertragung über POP3 und IMAP.
+  \item[2.] SSLv2 und SSLv3 darf nicht verwendet werden. TLS 1.0 und 1.1 sollte nicht mehr verwendet werden. TLS 1.2 soll verwendet werden.
+  \item[3.] HSTS dient dazu Man-in-the-middle-Angriffe zu verhindern. Dazu
+\end{itemize}
 
 \section*{Aufgabe 2 - SSL-Client}
+\begin{itemize}
+  \item[1.] Folgende Cipher Suites unterstützt OpenSSL version 1.0.1f unter
+    Ubuntu:
+    ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:SRP-DSS-AES-256-CBC-SHA:SRP-RSA-AES-256-CBC-SHA:SRP-AES-256-CBC-SHA:DHE-DSS-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA256:DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:DHE-DSS-CAMELLIA256-SHA:ECDH-RSA-AES256-GCM-SHA384:ECDH-ECDSA-AES256-GCM-SHA384:ECDH-RSA-AES256-SHA384:ECDH-ECDSA-AES256-SHA384:ECDH-RSA-AES256-SHA:ECDH-ECDSA-AES256-SHA:AES256-GCM-SHA384:AES256-SHA256:AES256-SHA:CAMELLIA256-SHA:PSK-AES256-CBC-SHA:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:SRP-DSS-3DES-EDE-CBC-SHA:SRP-RSA-3DES-EDE-CBC-SHA:SRP-3DES-EDE-CBC-SHA:EDH-RSA-DES-CBC3-SHA:EDH-DSS-DES-CBC3-SHA:ECDH-RSA-DES-CBC3-SHA:ECDH-ECDSA-DES-CBC3-SHA:DES-CBC3-SHA:PSK-3DES-EDE-CBC-SHA:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:SRP-DSS-AES-128-CBC-SHA:SRP-RSA-AES-128-CBC-SHA:SRP-AES-128-CBC-SHA:DHE-DSS-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-SHA256:DHE-DSS-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA:DHE-RSA-SEED-SHA:DHE-DSS-SEED-SHA:DHE-RSA-CAMELLIA128-SHA:DHE-DSS-CAMELLIA128-SHA:ECDH-RSA-AES128-GCM-SHA256:ECDH-ECDSA-AES128-GCM-SHA256:ECDH-RSA-AES128-SHA256:ECDH-ECDSA-AES128-SHA256:ECDH-RSA-AES128-SHA:ECDH-ECDSA-AES128-SHA:AES128-GCM-SHA256:AES128-SHA256:AES128-SHA:SEED-SHA:CAMELLIA128-SHA:PSK-AES128-CBC-SHA:ECDHE-RSA-RC4-SHA:ECDHE-ECDSA-RC4-SHA:ECDH-RSA-RC4-SHA:ECDH-ECDSA-RC4-SHA:RC4-SHA:RC4-MD5:PSK-RC4-SHA:EDH-RSA-DES-CBC-SHA:EDH-DSS-DES-CBC-SHA:DES-CBC-SHA
+  \item[2.] Der öffentlich Schlüssel von \textit{fu-berlin.de:443} ist 2048 Bit
+    groß.
+  \item[3.] Es wurde die Suite \textit{ECDHE-RSA-AES256-GCM-SHA384} verwendet.
+    Dies bedeutet für den Schlüsselaustausch wird Elyptischen Kurven
+    Diffie-Hellman verwendet der mit RSA signiert wird. Für das Verschlüssln
+    wird AES mit 256 Bit im Counter Mode und der MAC Funktion SHA384 verwendet.
+\end{itemize}
 
 \section*{Aufgabe 3 - POODLE-Angriff}
 
+\begin{itemize}
+  \item[1.] Padding wird verwendet um die Länge des Klartextes anzupassen, wenn am Ende des Texten Bytes fehlen.
+  \item[2.] In SSLv3 ist nicht spezifisiert, was der Padding enthält, sondern nur, das am Ende die Länge des Padding steht.
+  \item[3.] SSLv3 wird noch verwendet, dies ist aber seid 15 Jahren veraltet und soll nicht verwendet werden.
+  \item[4.] \textit{fu-berlin.de:443} verwendet TLSv1.2.
+  \item[5.]
+  \item[6.] Nein als minimum ist TSL 1.0 und maximum TSL 1.2 angegeben
+\end{itemize}
+
 \section*{Aufgabe 4 - Logjam-Angriff}
+
+\begin{itemize}
+  \item[1.] Es ist möglich, wenn ein Server den Cipher export unterstützt und kleiner als 2048 Bit Diffie-Hellman Gruppe.
+  \item[2.] Für viele Verbindungen wurden die selbe generierte Schlüssel
+    verwendet und da dieser nur aus der verwendeten Primzahl von Diffie-Hellman
+    abhängig ist, welche auf vielen Servern gleich war, konnte dies ausgenutzt werden.
+  \item[3.] Auf der Server Seite muss der Support für Cipher Suite export abgeschaltet werden und eine einzigartige ID von mindestens 2048 Bit Diffie-Hellman Gruppe erzeugen. Außerdem sollen TLS Bibliotheken min 2048 Bit Primzahllänge verwenden und alle Diffie-Hellman primzahlen die kleiner als 1024 Bit sind verwerfen.
+  \item[4.] Es ist nicht möglich, da zum einen ein Schlüssel der Länge 2048 Bit verwendet wird. Außerdem kann mit dem folgendem Befehl getestet werden ob cipher export erlaubt ist.
+    \begin{lstlisting}
+      openssl s_client -connect fu-berlin.de:443 -cipher "EXP"
+    \end{lstlisting}
+    Aus Ausgabe erhält man \textit{Secure Renegotion is NOT supported}. Somit kann der FU Server nicht angegriffen werden.
+\end{itemize}
 
 \end{document}
