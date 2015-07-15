@@ -201,3 +201,284 @@ Ziel: sicherer Austausch von SChlusse über unsichere Kanäle
 
 
 ####Diffie-Hellman
+
+* A Parameter (g,p)
+* B Parameter (g,p)
+* A choose random x, X = g^x mod p, send X to B
+* B choose random y, Y = g^y mod p, compute X^y = (g^x)^y = g^xy mod p, send Y
+  to A
+* A compute Y^x = (g^y)^x = g^xy mod p
+
+#####Sicherheit
+
+* x und y nur über log_y g^x oder log_x g^y bestimmbar
+* Forward Securecy, immer neue x,y (z.b. tls, DHE)
+
+#####Angriffe
+
+* Man-in-the-Middle (Lösung Authentisieren der Schlüsselteile)
+
+#####SPEKE (Simple Pssword Exponential Key Exchange)
+
+* g wird aus einen gemeinsamen Password und einer Hashfunktion berechnet
+
+
+####Needham-Schroeder-Protokoll
+
+* Symmetrische Version benötigt Authentifizierungsserver
+
+* A send Nounce to AS
+* AS berechnet T_A und T_B
+* As schickt T_A zu A und T_B zu B
+* A dec T_A
+* B Schickt T_BA zu A
+* A schickt T_AB zu B
+* Da Nounce von B in T_AB weiß B das es richtig ist
+
+* Replay Attacke durch Nonce verhindert
+
+###Deterministische Zufallszahlengeneratoren
+
+* Entropie kann durch det. Nachbearbeitung nicht erhöht werden
+
+* Seed -> xor -> Hashfunktion -> mehrmals zu xor -> Hashfunktion -> Zufallswert
+* Sichere Blockchiffre im Counter-Mode
+
+####Seedgenerierung
+
+* Linux /dev/random, Nutzt verschiedene Ereignisse wie Systemzeit und
+  Nutzeraktivitßt
+* Windows Kommbination verschiedener Systemaufrufe
+  - ReadTimeStampCounter: 2^30 verschiedene Werte pro Sek
+  - KeQuerySystemTime: 2^23 verschiedene Werte pro Sek
+
+
+###Instanzauthentisierung
+
+* Wissen (Passwort)
+* Besitzt (Schlüssel auf Chipkarte)
+* Eigenschaft (Biometrie) Fingerabdruck, Iris
+
+####Faktor Wissen (Benutzername/Password)
+
+* Nachteile: Ausspähen (Phishing, Keyloggen) -> Replay-Attacken,
+  Man-in-the-Middle
+* Verbesserung: Einmalpasswörter
+
+#####Passwortlisten
+
+* TAN, Challenge-Response
+* Prüfer wählt index i -> Beweisender(Liste) i-tes Passwort
+
+#####Passwortgeneratoren
+
+**Zeitgesteuerte**
+
+* Google Authenticator, nur im Zeitintervall gültig
+
+**Ereignisgesteuerte**
+
+* Lamport-Hash, basiert au einer krypto Hashfunktion mit Zufallswert
+* Problem nach N Passwörtern kommen gleiche, Lösung neuen Zufallswert
+
+#####Challenge-Response
+
+* A und B haben Schlüssel k
+* Prüfer B choose random c, send c to Beweisender A
+* A r = MAC(k,c), send r to B
+* B r' = MAC(k,c), check if r' = r
+
+
+**Einmal Passwörter**
+
+* Sicher gegen Ausspähen, Verhindert Replay-Attacken
+
+
+####Faktor Wissen
+
+**Sicherheitselemente**
+
+* Nutzung Sicherer Hardware geschützt gegen
+
+* physikalische Angriffe (bohren, fräsen)
+* elektrische Angriffe (mehr Strom, als Spez. erlaubt)
+* Angrifffe mit Licht und Laser
+
+####2 Faktor Authentisierung
+
+* Besitz (Sicherheitselement) und Wissen (PIN)
+* Challenge-Response
+
+####Biometrie
+
+* Angriff auf die Sensoren und Programme der Messelemente
+
+
+##Zugriffskontrolle
+
+Authentisierung (Subjekt behauptet Identität) -> Authentifizierung (Identität
+wird geprüft) -> Autorisierung (darf Subjekt auf Objekt zugreifen) -> Zugriff
+
+* Reference Moinitor: Setzt das Sicherheitsmodell um
+
+**Zugriffsmatrix**
+
+**Access Control List**
+
+* Speicherung der Rechte der Subjekte beim Objekt
+
+**Capabiities**
+
+* Speicherung der Rechte an Objekten beim Subjekt
+
+* Vorteile: Transparent, leicht verifizieren
+* Nachteil: Schlecht skalierbar
+
+* Abtraktionen: Gruppen, negative Zugriffsrechte, Protection Ring
+
+**Safety Problem**
+
+Gegeben ein Sicherheitsmodell, eine (initiale) Zugriffsmtrix M und ein
+Zugriffrecht r. Die Entscheidung, ob M sicher in Bezug auf r ist, ist
+unentscheidbar.
+
+Es ist entscheidbar, wenn jedes Kommando nur eine Basisoperation ausführt (mono-operational)
+
+###Bell LaPadula
+
+* erweiterung der Matrixmodell um Systembestimmte Eigenschaften
+
+####einfaches
+
+* Sicherheitsmarken (unklassifiziert, vertraulich, geheim, streng geheim) <=
+  Ordnung
+
+**Zugriffskontrolle**
+
+1. Kontrolle der Zugriffe über Zugriffsmatrix
+2. no read-up read m => cl(o) <= cl(s)
+3. no write-down write m => cl(s) <= cl(o)
+4. Strong Tranquility Property: nur vertrauenswürdige Personen dürfen cl ändern
+
+**Problem: Need-to-Know-Prinzip**
+
+* Lösung: Festlegung von Zuständigkeitsbereichen
+* Sicherheitsmarke und Zuständigkeitsbereich (SM X Z, <=) geordnet
+
+**Problem: kein Schreiben von oben nach unten**
+
+* Lösung: zeitlich beschränkte untere Sicherheitsklasse
+
+**Problem: kein Integritätsschutz**
+
+* Schreiben nach oben erlaubt (überschreiben)  *-property
+
+**Problem: verdeckte Informationskanäle**
+
+* Dateinamen, Antwortzeiten usw...
+
+
+###Chinese Wall
+
+* Beraterunternehmen
+
+##Informationsfluss
+
+###Compiler based Mechanismen
+
+* expliziter: y =x
+* impliziter: if Anweisung
+* verdeckter: Laufzeit einer Schleife,z.b bei Verschlüsselung
+
+* Kanäle durch gemeinsam genutzten Resourcen
+
+**verhindern von Känalen**
+
+* Isolation: VM, Sandbox
+* Zufall nutzen
+
+
+##Softwaresicherheit
+
+####Heathbleed
+
+###Benutzereingaben
+
+**UTF-8 Decoding (MS)**
+
+**rlogin**
+
+**SQL Injection**
+
+**Stack overflow**
+
+**Race Conditions: Starbucks**
+
+##Internetsicherheit
+
+* Typ 1: Zugang zu Zwischenknoten
+  - passiver Angriff (ausspähen)
+  - aktiver Angriff (manipulation)
+* Typ 2: versuch auf Endknoten (client) zuzugreifen
+  - eindringen ins lokale Netz
+  - Störung von Funktionsfähigkeit
+* Typ 3: bösartiger Endknoten (Server)
+  - Identität eines vertrauenswürdigen Server annehmen
+
+###Kommunikationssicherheit Typ 1
+
+####TLS
+
+* Symmetrische Verschlüsselung der Nutzlast
+* Datenauthentisierung der Nutzlast
+* Handshake
+
+####IPSec
+
+* Authentication Header: Nur Datenauth
+* Encapsulating Security Payloads (ESP): Verschl., Datenauth
+
+#####Internet Key Exchange Protokoll
+
+#####ESP
+
+* Transportmodus: Direkte Verbindung von Host to Host
+* Transportmodus: Verbindung zwichen Security Gateways (VPN)
+
+###Netzwerksicherheit Typ 2
+
+* TCP Hijacking
+
+####Firewall
+
+* Paketfilter: IP- und TCP Header (Port, Adresse) analysiert
+* Zustandsgesteuerte Filter: Zulassen von S -http-> C wenn vorab C -http-> S
+* Proxy-Filter: Proxy gegenüber S als C und gegenüber C als S
+  - komplex, damit Ziel von Angriffen
+* Application-Filter: Layer 7, Nutzlast analyse
+  - Vorteil: bessere Analyse
+  - Nachteil: Komplex, potentielle Schwachstelle
+  - Lösung: Analyse in gesicherter Umgebung
+
+####DNS
+
+* Client -> Resolver
+* Resolver -> Rootserver
+* Resolver -> Toplevel Domain Server
+* Resolver -> DNS
+* Resolver -> Client
+
+#####DNS Cache Poising
+
+**Dan Kaminsky-Attacke**
+
+
+###Websicherheit Typ 3
+
+* Sicherheitsstrategie: Same Origin Policy
+
+####DNS Rebinding
+
+####Cross Site Scripting
+
+####Cross Site Request Forgery
